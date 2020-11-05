@@ -1,0 +1,6 @@
+Paste error message
+pastebin.com
+gist.github.com
+
+Automate the boring stuff with Python 
+https://automatetheboringstuff.com/
