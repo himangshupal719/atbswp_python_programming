@@ -1,0 +1,62 @@
+1. Which of the following are operators, and which are values?
+
+* -> Operator
+'hello' -> Value
+-88.8 -> Value
+- -> Operator
+/ -> Valie
++ -> Operator
+5 -> Value
+-------------------------------------------------------------------
+2. Which of the following is a variable, and which is a string?
+spam -> variable
+'spam' -> string
+--------------------------------------------------------------------
+3. Name three data types.
+Integer, Floating point numbers, String
+--------------------------------------------------------------------
+4. What is an expression made up of? What do all expressions do?
+Expressions consist of values and operators. All expressions always evaluate (that is, reduce) down to a single value. 
+---------------------------------------------------------------------
+5. This chapter introduced assignment statements, like spam = 10. What is the difference between an expression and a statement?
+
+An expression is a statement that returns a value. So if it can appear on the right side of an assignment, or as a parameter to a method call, it is an expression. A Statement is a action or a command that does something.variable declaration and assignment are statements.
+---------------------------------------------------------------------
+6. What does the variable bacon contain after the following code runs?
+bacon = 20
+bacon + 1
+bacon contains 21.
+----------------------------------------------------------------------
+7. What should the following two expressions evaluate to?
+'spam' + 'spamspam'
+'spam' * 3
+
+spamspamspam
+spamspamspam
+-----------------------------------------------------------------------
+8. Why is eggs a valid variable name while 100 is invalid?
+Variable name -
+-->It can be only one word with no spaces.
+-->It can use only letters, numbers, and the underscore (_) character.
+-->It can’t begin with a number. 
+------------------------------------------------------------------------
+9. What three functions can be used to get the integer, floating-point number, or string version of a value?
+float(), int(), str()
+------------------------------------------------------------------------
+10. Why does this expression cause an error? How can you fix it?
+'I have eaten ' + 99 + ' burritos.'
+Reason of error - String concatenation cannot be performed with integers values. 99 is integer. To fix the issue, we can use below expression insted - 'I have eaten ' + str(99) + ' burritos.'str(99) will convert integer to string. So, conctenation will be possible 
+-------------------------------------------------------------------------
+Extra credit: Search online for the Python documentation for the len() function. It will be on a web page titled “Built-in Functions.” Skim the list of other functions Python has, look up what the round() function does, and experiment with it in the interactive shell.
+
+Python built in function link - https://docs.python.org/3/library/functions.html
+len(s) finctin returns the length (the number of items) of an object. The argument may be a sequence (such as a string, bytes, tuple, list, or range) or a collection (such as a dictionary, set, or frozen set).
+
+round(number[, ndigits]) function returns number rounded to ndigits precision after the decimal point. If ndigits is omitted or is None, it returns the nearest integer to its input.
+For the built-in types supporting round(), values are rounded to the closest multiple of 10 to the power minus ndigits; if two multiples are equally close, rounding is done toward the even choice (so, for example, both round(0.5) and round(-0.5) are 0, and round(1.5) is 2). Any integer value is valid for ndigits (positive, zero, or negative). The return value is an integer if ndigits is omitted or None. Otherwise the return value has the same type as number.
+
+
+
+
+
+

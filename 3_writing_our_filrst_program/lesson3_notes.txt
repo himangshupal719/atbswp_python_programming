@@ -1,0 +1,44 @@
+Execution = which instruction is being currently executed
+
+Comment = # at the begining - Python ignores comments.
+Sometimes, programmers will put a # in front of a line of code to temporarily remove it while testing a program. This is called commenting out code, and it can be useful when you’re trying to figure out why a program isn’t working.
+
+Blank lines are ignored by Python
+
+print() function
+Functions - Mini programs in a program.
+When Python executes this line, you say that Python is calling the print() function and the string value is being passed to the function.
+Value that is passed to a function call is an argument.
+You can also use this function to put a blank line on the screen; just call print() with nothing in between the parentheses.
+
+input() = Python waits for the user to enter some text in the key board. 
+The input() function waits for the user to type some text on the keyboard and press ENTER.
+This function call evaluates to a string equal to the user’s text.
+
+** If you call input() and see an error message, like NameError: name 'Al' is not defined, the problem is that you’re running the code with Python 2 instead of Python 3.
+
+Remember that expressions can always evaluate to a single value.
+
+len() = 
+You can pass the len() function a string value (or a variable containing a string), and the function evaluates to the integer value of the number of characters in that string.
+
+str() = returns string value - datatype conversion
+int() = returns integer value - data type conversion
+float() = return decimal value.
+The str(), int(), and float() functions will evaluate to the string, integer, and floating-point forms of the value you pass, respectively.
+
+The str() function is handy when you have an integer or float that you want to concatenate to a string. The int() function is also helpful if you have a number as a string value that you want to use in some mathematics.
+
+Note that if you pass a value to int() that it cannot evaluate as an integer, Python will display an error message. e.g. int('99.99').
+
+The int() function is also useful if you need to round a floating-point number down.
+
+Although the string value of a number is considered a completely different value from the integer or floating-point version, an integer can be equal to a floating point.
+>>> 42 == '42'
+False
+>>> 42 == 42.0
+True
+>>> 42.0 == 0042.000
+True
+
+input() function always returns a string
