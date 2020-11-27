@@ -1,0 +1,46 @@
+Flow contron statements - 
+If and Else
+
+Indenterd code = Block
+Clause
+
+bool() - function 
+bool(0) = False
+
+
+
+Elements of Flow Control- 
+Condition 
+Clause - block of code
+
+Condition:
+- The Boolean expressions yare considered conditions, which are the same thing as expressions; condition is just a more specific name in the context of flow control statements. 
+- Conditions always evaluate down to a Boolean value, True or False. 
+- A flow control statement decides what to do based on whether its condition is True or False, and almost every flow control statement uses a condition.
+
+Block of code:
+- Lines of Python code can be grouped together in blocks. 
+- Block begins and ends with the indentation of the lines of code. 
+  - Blocks begin when the indentation increases.
+  - Blocks can contain other blocks.
+  - Blocks end when the indentation decreases to zero or to a containing block’s indentation.
+
+if Statement:
+If this condition is true, execute the code in the clause.
+
+else Statement:
+An if clause can optionally be followed by an else statement.
+The else clause is executed only when the if statement’s condition is False.
+If this condition is true, execute this code. Or else, execute that code. 
+An else statement doesn’t have a condition.
+
+elif Statement:
+The elif statement is an “else if” statement that always follows an if or another elif statement. It provides another condition that is checked only if all of the previous conditions were False.
+Once one of the statements’ conditions is found to be True, the rest of the elif clauses are automatically skipped. for elif statements, the order matters.
+Optionally, you can have an else statement after the last elif statement. In that case, it is guaranteed that at least one (and only one) of the clauses will be executed. If the conditions in every if and elif statement are False, then the else clause is executed. “If the first condition is true, do this. Else, if the second condition is true, do that. Otherwise, do something else.”
+
+
+
+
+
+

@@ -1,0 +1,62 @@
+Flow control statements can decide which Python instructions to execute under which conditions.
+These flow control statements directly correspond to the symbols in a flowchart.
+
+- Boolean values
+- Compariosn Operator
+- Boolean Operators
+
+Boolean Values: 
+While the integer, floating-point, and string data types have an unlimited number of possible values, the Boolean data type has only two values: True and False. (Boolean is capitalized because the data type is named after mathematician George Boole.)  
+
+
+Comparison Operators:
+Comparison operators, also called relational operators, compare two values and evaluate down to a single Boolean value.
+==
+!=
+<
+>
+<=
+>=
+
+
+== Equal to
+= Assignment
+
+Boolean Operator:
+The three Boolean operators (and, or, and not) are used to compare Boolean values. 
+And
+Or
+Not
+The and and or operators always take two Boolean values (or expressions), so they’re considered binary operators.
+
+Truth Table: And
+>>> True and True
+True
+>>> False and True
+False
+>>> False and False
+False
+>>> True and False
+
+Truth Table: Or
+>>> True or True
+True
+>>> True or False
+True
+>>> False or False
+False
+>>> False or True
+True
+
+
+Unlike and and or, the not operator operates on only one Boolean value (or expression). This makes it a unary operator. The not operator simply evaluates to the opposite Boolean value.
+Truth Table: Not
+>>> not True
+False
+>>> not False
+True
+>>> 
+
+** The Boolean operators have an order of operations just like the math operators do. After any math and comparison operators evaluate, Python evaluates the not operators first, then the and operators, and then the or operators.
+
+
