@@ -4,3 +4,10 @@ gist.github.com
 
 Automate the boring stuff with Python 
 https://automatetheboringstuff.com/
+
+To view the execution of a program using the Python Tutor visualization tool - 
+http://pythontutor.com/
+https://autbor.com/
+
+Python buil in function - 
+https://docs.python.org/3/library/functions.html
