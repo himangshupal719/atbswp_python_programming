@@ -1,13 +1,16 @@
-Paste error message
+Paste error message:
 pastebin.com
 gist.github.com
 
-Automate the boring stuff with Python 
+Automate the boring stuff with Python:
 https://automatetheboringstuff.com/
 
-To view the execution of a program using the Python Tutor visualization tool - 
+To view the execution of a program using the Python Tutor visualization tool:
 http://pythontutor.com/
 https://autbor.com/
 
-Python buil in function - 
+Python built in function:
 https://docs.python.org/3/library/functions.html
+
+Python Package Index:
+https://pypi.org/
