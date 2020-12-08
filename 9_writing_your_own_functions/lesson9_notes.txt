@@ -1,0 +1,56 @@
+Functions - 
+print()
+input()
+len()
+
+Function is like a mini program in a program. 
+We can write our own functions. Function got codes that executes when function is called. 
+
+def statement defines a function. It does not execute the code inside of it.  
+
+Funtion gropus code that execute multiple times. 
+
+De-duplication
+
+Argument: Values passed in the function call.
+Parameter: Variable inside the function.
+
+Return statement: Value returned by the function call.
+
+print('hello') --> hello 
+print does not return a string. It does not return string. It displays the string as side effect.
+Print returns special value 'None'.
+
+None - None type data type. 
+In interractive shell, None does not show up if we enter it.
+
+>>> spam = print()
+
+>>> spam
+>>> spam == None
+True
+
+Every function call has a return value. If a function does not have a return statement, the return value defaults to the None.
+
+Keyword arguments - Optional arguments to pass to a function call. 
+print() function automatically adds new line 
+
+print('Hello')
+print('World')
+
+>>> Hello
+>>> World
+
+print('Hello', end = '')  #end is the keyword argument. 
+print('World')
+
+>>> HelloWorld
+
+print automatically seperate the strings when multiple strings passed to a single print() function. 
+>>> print('cat','dog','mouse')
+cat dog mouse
+
+>>> print('cat','dog','mouse', sep='ABC')
+catABCdogABCmouse
+
+Keyword arguments are optional. 
