@@ -3,19 +3,44 @@ print()
 input()
 len()
 
-Function is like a mini program in a program. 
+Function is like a mini program within a program. 
 We can write our own functions. Function got codes that executes when function is called. 
 
-def statement defines a function. It does not execute the code inside of it.  
+def statement defines a function. It does not execute the code inside of it. Code in the block that follows the def statement is the body of the function.   
+
+Functionm call - function name followed by parentheses e.g. function_name()
 
 Funtion gropus code that execute multiple times. 
 
-De-duplication
+De-duplication - which means getting rid of duplicated or copy-and-pasted code. Deduplication makes your programs shorter, easier to read, and easier to update.
+A major purpose of functions is to group code that gets executed multiple times.
 
 Argument: Values passed in the function call.
 Parameter: Variable inside the function.
 
-Return statement: Value returned by the function call.
+Parameters are variables that contain arguments. When a function is called with arguments, the arguments are stored in the parameters.
+
+def hello(name):
+	print('Hello, ' + name)
+
+hello('Bob')
+
+name = parameter
+Bob = Argument
+
+One special thing to note about parameters is that the value stored in a parameter is forgotten when the function returns.
+
+def sayHello(name):
+       print('Hello, ' + name)
+sayHello('Al')
+
+- Define a function is to create it. The def statement defines the sayHello() function.
+- The sayHello('Al') line calls the now-created function, sending the execution to the top of the function’s code. 
+- This function call is also known as passing the string value 'Al' to the function.
+- A value being passed to a function in a function call is an argument. 
+- The argument 'Al' is assigned to a local variable named name. Variables that have arguments assigned to them are   parameters.
+
+Return statement: Value returned by the function call. The value that a function call evaluates to is called the return value of the function
 
 print('hello') --> hello 
 print does not return a string. It does not return string. It displays the string as side effect.
@@ -23,6 +48,7 @@ Print returns special value 'None'.
 
 None - None type data type. 
 In interractive shell, None does not show up if we enter it.
+In Python, there is a value called None, which represents the absence of a value. The None value is the only value of the NoneType data type. (Other programming languages might call this value null, nil, or undefined.) Just like the Boolean True and False values, None must be typed with a capital N.
 
 >>> spam = print()
 
@@ -54,3 +80,8 @@ cat dog mouse
 catABCdogABCmouse
 
 Keyword arguments are optional. 
+
+** expressions are composed of values and operators. A function call can be used in an expression because the call evaluates to its return value
+
+** Behind the scenes, Python adds return None to the end of any function definition with no return statement. This is similar to how a while or for loop implicitly ends with a continue statement. Also, if you use a return statement without a value (that is, just the return keyword by itself), then None is returned.
+
