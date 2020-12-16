@@ -1,0 +1,11 @@
+Getting an error, or exception, in your Python program means the entire program will crash. You don’t want this to happen in real-world programs. Instead, you want the program to detect errors, handle them, and then continue to run.
+
+Errors can be handled with try and except statements.
+
+The code that could potentially have an error is put in a try clause. The program execution moves to the start of a following except clause if an error happens.
+
+Note that any errors that occur in function calls in a try block will also be caught. 
+
+Once the execution jumps to the code in the except clause, it does not return to the try clause. Instead, it just continues moving down the program as normal.
+
+When the user presses CTRL-C while a Python program is running, Python raises the KeyboardInterrupt exception.

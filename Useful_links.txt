@@ -14,3 +14,15 @@ https://docs.python.org/3/library/functions.html
 
 Python Package Index:
 https://pypi.org/
+
+Python Exception List: 
+https://www.tutorialspoint.com/python/standard_exceptions.htm
+
+The Python Standard Library:
+https://docs.python.org/3/library/index.html
+
+Python Home:
+https://www.python.org/
+
+Python Learning - Other link: 
+https://realpython.com/python-print/
