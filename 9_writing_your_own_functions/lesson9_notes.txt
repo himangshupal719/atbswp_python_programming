@@ -85,3 +85,6 @@ Keyword arguments are optional.
 
 ** Behind the scenes, Python adds return None to the end of any function definition with no return statement. This is similar to how a while or for loop implicitly ends with a continue statement. Also, if you use a return statement without a value (that is, just the return keyword by itself), then None is returned.
 
+
+The call stack - is how Python remembers where to return the execution after each functin call. The call stack is not stored in a variable in the program; rather Python handles it behind the scenes. When a program calls a function, Python creates a frame object on top of the call stack. Frame objects store the function call so that Python can remember where to return. If another function call is made, Python puts another frame object on the call stack above the other one. When a function call returns, Python removes a frame object from the top of the stack and moves the execution to the line number stored in it. Note that frame objects are always added and removed from the top of the stack and not from any other place.
+ 

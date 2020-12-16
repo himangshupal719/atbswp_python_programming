@@ -1,0 +1,76 @@
+Global and Local scope:
+
+Global and local variables
+
+Scope is a container of variables. 
+
+Global scope - when the program starts and end when the program terminates. 
+Local scope - Local scope starts when the function is called. The vriables are created during the function execution. Locla scope terminates and so as the variables as soon as the function calls returns. 
+
+Variables inside a function are temporary. They do not exists outside of the function call. 
+
+- Code in global scope cannot use any local variables. 
+- Code in local scope can access global variable. 
+- Code in one function's local scope cannot use variables in another function's local scope.
+- Same name can be used for variables decalred in different scopes. 
+
+Assignment statement in a function = Local variable
+No assignment statement in a function = Global variable
+
+
+
+Parameter and variables that are assigned in a called function are said to exists in athat function's local scope.
+Variables that are assigned outsie all functions are said to exist in the global scope. 
+Variable that exists in a local scope is called a local variable.
+Variable that exists in the global scope is called a global variable. 
+
+The reason Python has different scopes instead of just making everything a global variable is so that when variables are modified by the code in a particular call to a function, the function interacts with the rest of the program only through its parameters and the return value. This narrows down the number of lines of code that may be causing a bug. If your program contained nothing but global variables and had a bug because of a variable being set to a bad value, then it would be hard to track down where this bad value was set. It could have been set from anywhere in the program, and your program could be hundreds or thousands of lines long! But if the bug is caused by a local variable with a bad value, you know that only the code in that one function could have set it incorrectly.
+
+** While using global variables in small programs is fine, it is a bad habit to rely on global variables as your programs get larger and larger.
+
+The Global Statement
+---------------------
+If you need to modify a global variable from within a function, use the global statement.
+
+def spam():
+  global eggs
+  eggs = 'spam'
+
+eggs = 'global'
+spam()
+print(eggs)
+
+
+There are four rules to tell whether a variable is in a local scope or global scope:
+- If a variable is being used in the global scope (that is, outside of all functions), then it is always a global variable.
+- If there is a global statement for that variable in a function, it is a global variable.
+- Otherwise, if the variable is used in an assignment statement in the function, it is a local variable.
+- But if the variable is not used in an assignment statement, it is a global variable. 
+
+def spam():
+    global eggs
+    eggs = 'spam'  # this is the global
+
+def bacon():
+    eggs = 'bacon'  # this is a local
+
+def  ham():
+    print(eggs)  # this is the global
+
+eggs = 42  # this is the global
+
+spam()
+
+print(eggs)
+
+If you ever want to modify the value stored in a global variable from in a function, you must use a global statement on that variable.
+
+If you try to use a local variable in a function before you assign a value to it, as in the following program, Python will give you an error.
+def spam():
+    print(eggs) # ERROR!
+    eggs = 'spam local'
+
+eggs = 'global'
+spam()
+
+
