@@ -20,6 +20,7 @@
 3
 >>> 
 
+- return value from range(4) is a sequence value
 - list() function: To get the actual list values from a range object then pass the range object to the list() function. 
 
 >>> list(range(4))
@@ -35,7 +36,7 @@
 >>> for i in range(len(supplies)):
 	print('Index ' + str(i) + ' in supplies is: ' + supplies[i])
 
-- Multiple assignment:
+- Multiple assignment:technically called tuple unpacking - is a shortcut that lets you assign multiple variables with the values in a list in one line of code.
 
 >>> cat = ['fat', 'orange', 'loud']
 >>> size = cat[0]
@@ -56,6 +57,8 @@
 >>> disposition
 'loud'
 >>> 
+
+- The number of variables and the length of the list must be exactly equal, or Python will give you a ValueError:
 
 >>> size, color, disposition = 'skinny', 'black','quiet'
 >>> size
