@@ -1,0 +1,259 @@
+-----------------------
+The Tuple Data Type:
+-----------------------
+
+- The tuple data type is almost identical to the list data type, except in two ways. First, tuples are typed with parentheses, ( and ), instead of square brackets, [ and ]. 
+
+>>> eggs = ('hello', 42, 0.5)
+>>> eggs[0]
+'hello'
+>>> eggs[1:3]
+(42, 0.5)
+>>> len(eggs)
+3
+
+- But the main way that tuples are different from lists is that tuples, like strings, are immutable. 
+- Tuples cannot have their values modified, appended, or removed.
+
+>>> eggs
+('hello', 42, 0.5)
+>>> eggs[1] = 99
+Traceback (most recent call last):
+  File "<pyshell#71>", line 1, in <module>
+    eggs[1] = 99
+TypeError: 'tuple' object does not support item assignment
+
+- If you have only one value in your tuple, you can indicate this by placing a trailing comma after the value inside the parentheses. The comma is what lets Python know this is a tuple value.
+
+>>> ('hello')
+'hello'
+>>> type('hello',)
+<class 'str'>
+>>> (('hello',))
+('hello',)
+>>> type(('hello',))
+<class 'tuple'>
+>>> type('hello')
+<class 'str'>
+>>> type(('hello'))
+<class 'str'>
+
+-  If you need an ordered sequence of values that never changes, use a tuple.
+- A second benefit of using tuples instead of lists is that, because they are immutable and their contents don’t change, Python can implement some optimizations that make code using tuples slightly faster than code using lists.
+
+----------------------------------------------------
+Converting types with list() and tuple() functions: 
+----------------------------------------------------
+
+- The functions list() and tuple() will return list and tuple versions of the values passed to them.
+
+>>> tuple(['cat','dog',5])
+('cat', 'dog', 5)
+>>> list(('cat', 'dog',))
+['cat', 'dog']
+>>> list(('cat', 'dog',5))
+['cat', 'dog', 5]
+>>> list(('hello'))
+['h', 'e', 'l', 'l', 'o']
+>>> tuple(['hello'])
+('hello',)
+
+
+----------------
+References:
+----------------
+
+-  variables “store” strings and integer values. Technically, variables are storing references to the computer memory locations where the values are stored. 
+
+>>> spam = 42
+>>> cheese = spam
+>>> spam = 100
+>>> spam
+100
+>>> cheese
+42
+
+>>> cheese += 1
+>>> cheese
+101
+>>> spam
+100
+
+When you assign 42 to the spam variable, you are actually creating the 42 value in the computer’s memory and storing a reference to it in the spam variable. When you copy the value in spam and assign it to the variable cheese, you are actually copying the reference. Both the spam and cheese variables refer to the 42 value in the computer’s memory. When you later change the value in spam to 100, you’re creating a new 100 value and storing a reference to it in spam. This doesn’t affect the value in cheese. 
+
+Integers are immutable values that don’t change; changing the spam variable is actually making it refer to a completely different value in memory.
+
+- But lists don’t work this way, because list values can change; that is, lists are mutable. 
+
+>>> spam = [0, 1, 2,3,4,5]
+>>> cheese = spam # The reference is being copied, not the list.
+>>> cheese
+[0, 1, 2, 3, 4, 5]
+>>> cheese[1] = 'Hello!'
+>>> cheese
+[0, 'Hello!', 2, 3, 4, 5]
+>>> spam
+[0, 'Hello!', 2, 3, 4, 5]
+
+The code touched only the cheese list, but it seems that both the cheese and spam lists have changed.
+
+--------------------------------
+Identity and the id() function:
+--------------------------------
+
+- All values in Python have a unique identity that can be obtained with the id() function.
+
+>>> id('Howdy')
+1758867750576
+
+When Python runs id('Howdy'), it creates the 'Howdy' string in the computer’s memory. The numeric memory address where the string is stored is returned by the id() function.
+
+- Like all strings, 'Howdy' is immutable and cannot be changed. If you “change” the string in a variable, a new string object is being made at a different place in memory, and the variable refers to this new string.
+
+>>> bacon = 'Hello'
+>>> id(bacon)
+1758867985840
+>>> bacon += 'world!' # A new string is made from 'Hello' and 'World!'.
+>>> id (bacon)
+1758867749488
+
+- However, lists can be modified because they are mutable objects. The append() method doesn’t create a new list object; it changes the existing list object. We call this “modifying the object in-place.”
+
+>>> eggs = ['cat', 'dog']
+>>> id(eggs)
+1758867984768
+>>> eggs.append('moose')
+>>> eggs
+['cat', 'dog', 'moose']
+>>> id(eggs)
+1758867984768
+>>> eggs = ['bat', 'rat', 'cow']
+>>> eggs
+['bat', 'rat', 'cow']
+>>> id(eggs)
+1758867750592
+>>> cheese = eggs
+>>> id(cheese)
+1758867750592
+>>> id(eggs)
+1758867750592
+>>> 
+
+- If two variables refer to the same list (like spam and cheese in the previous section) and the list value itself changes, both variables are affected because they both refer to the same list. The append(), extend(), remove(), sort(), reverse(), and other list methods modify their lists in place.
+
+>>> cheese.remove('bat')
+>>> cheese
+['rat', 'cow']
+>>> id(cheese)
+1758867750592
+>>> id(spam)
+1758865898176
+>>> id(eggs)
+1758867750592
+>>> eggs
+['rat', 'cow']
+
+- Python’s automatic garbage collector deletes any values not being referred to by any variables to free up memory. You don’t need to worry about how the garbage collector works, which is a good thing: manual memory management in other programming languages is a common source of bugs.
+
+- The extend() method adds the specified list elements (or any iterable) to the end of the current list.
+
+>>> fruit = ['apple', 'banana', 'cherry']
+>>> cars = ['Ford', 'BMW', ' Volvo']
+>>> fruit
+['apple', 'banana', 'cherry', 'Ford', 'BMW', ' Volvo']
+
+- list.extend(iterable)
+
+>>> points = (1,4,5,9)
+>>> fruit.extend(points)
+>>> fruit
+['apple', 'banana', 'cherry', 'Ford', 'BMW', ' Volvo', 1, 4, 5, 9]
+
+>>> name = 'Himangshu'
+>>> fruit.extend(name)
+>>> fruit
+['apple', 'banana', 'cherry', 'Ford', 'BMW', ' Volvo', 1, 4, 5, 9, 'H', 'i', 'm', 'a', 'n', 'g', 's', 'h', 'u']
+
+-------------------
+Passing References:
+-------------------
+def eggs(someParameter):
+    someParameter.append('Hello')
+
+
+spam = [1,2,3]
+eggs(spam)
+print(spam)
+        
+>>> [1, 2, 3, 'Hello']
+
+- Even though spam and someParameter contain separate references, they both refer to the same list. This is why the append('Hello') method call inside the function affects the list even after the function call has returned.
+
+-----------------------------------------------------
+The copy Module's copy() and deepcopy() functions:
+-----------------------------------------------------
+
+- Although passing around references is often the handiest way to deal with lists and dictionaries, if the function modifies the list or dictionary that is passed, you may not want these changes in the original list or dictionary value. 
+
+- copy.copy(), can be used to make a duplicate copy of a mutable value like a list or dictionary, not just a copy of a reference. 
+
+>>> import copy
+>>> spam = ['A', 'B', 'C', 'D']
+>>> id(spam)
+2045081337088
+>>> cheese = copy.copy(spam)
+>>> id(cheese)
+2045081337600
+>>> cheese
+['A', 'B', 'C', 'D']
+>>> cheese [1] = 42
+>>> spam
+['A', 'B', 'C', 'D']
+>>> cheese
+['A', 42, 'C', 'D']
+>>> 
+
+Now the spam and cheese variables refer to separate lists, which is why only the list in cheese is modified when you assign 42 at index 1.
+
+- shallow copy: A shallow copy creates a new object which stores the reference of the original elements.
+So, a shallow copy doesn't create a copy of nested objects, instead it just copies the reference of nested objects.
+copy.copy()
+
+>>> cheese = [[1,2,3], [4,5,6]]
+>>> spam = copy.copy(cheese)
+>>> spam
+[[1, 2, 3], [4, 5, 6]]
+>>> cheese
+[[1, 2, 3], [4, 5, 6]]
+>>> cheese[1][1]=99
+>>> cheese
+[[1, 2, 3], [4, 99, 6]]
+>>> spam
+[[1, 2, 3], [4, 99, 6]]
+>>> id(cheese)
+2045113453440
+>>> id(spam)
+2045113581504
+
+- deep copy: A deep copy creates a new object and recursively adds the copies of nested objects present in the original elements.
+copy.deepcopy()
+
+>>> cheese
+[[1, 2, 3], [4, 99, 6]]
+>>> spam
+[[1, 2, 3], [4, 99, 6]]
+>>> del cheese
+>>> cheese = copy.deepcopy(spam)
+>>> cheese
+[[1, 2, 3], [4, 99, 6]]
+>>> spam
+[[1, 2, 3], [4, 99, 6]]
+>>> spam[0][1] = 100
+>>> spam
+[[1, 100, 3], [4, 99, 6]]
+>>> cheese
+[[1, 2, 3], [4, 99, 6]]
+
+If you make changes to any nested objects in original object spam, you’ll see no changes to the copy cheese.
+
+Shallow and Deep Copy - good read - https://realpython.com/copying-python-objects/
