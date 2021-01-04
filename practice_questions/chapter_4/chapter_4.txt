@@ -1,0 +1,123 @@
+1. What is []?
+Empty List
+
+2. How would you assign the value 'hello' as the third value in a list stored in a variable named spam? (Assume spam contains [2, 4, 6, 8, 10].)
+ spam.insert(2, 'hello')
+ 
+For the following three questions, let’s say spam contains the list ['a', 'b', 'c', 'd']. 
+
+3. What does spam[int(int('3' * 2) // 11)] evaluate to?
+'d' - as the expression evaluates to 3. spam[3] is 'd'.
+
+4. What does spam[-1] evaluate to?
+'d'
+
+5. What does spam[:2] evaluate to?
+['a', 'b']
+
+For the following three questions, let’s say bacon contains the list [3.14, 'cat', 11, 'cat', True].
+
+6. What does bacon.index('cat') evaluate to?
+1 - the first occurance indeex of the 'cat' in the list. 
+
+7. What does bacon.append(99) make the list value in bacon look like?
+[3.14, 'cat', 11, 'cat', True, 99]
+
+8. What does bacon.remove('cat') make the list value in bacon look like?
+[3.14, 11, 'cat', True, 99]
+
+9. What are the operators for list concatenation and list replication?
++ used for list concatenation 
+* used for list replication
+
+10. What is the difference between the append() and insert() list methods?
+append() - append at the end of a list.
+insert() - insert a value in a particular index position of a list. 
+
+11. What are two ways to remove values from a list?
+listname.remove(value) - using remove() function
+del listname[index] - del statement will delete values at an index in a list. 
+
+12. Name a few ways that list values are similar to string values.
+a) As string values are typed with quote characters to mark where the string begins and ends, a list begins with an opening square bracket and ends with a closing square bracket, []
+b) The value [] is an empty list that contains no values, similar to '' the empty string. 
+c) Indexes work same way in both list and string. 
+d) List and string can be sliced same way using indexes. 
+e) len() function can be used on list and string values to get the number of elements of list and number of character of the string. 
+f) + concateneation and * replication operators work same way in list and string. 
+
+13. What is the difference between lists and tuples?
+The tuple data type is almost identical to the list data type, except two ways - 
+a) tuples are types with parentheses () instead of square brackets [].
+b) tuples are immutable. Tuples cannot have their values modified, appended, or removed.
+
+14. How do you type the tuple value that has just the integer value 42 in it?
+By placing a trailing comma after the value inside the parentheses, we can type tuple value that has just one integer value. Otherwise, Python will think you’ve just typed a value inside regular parentheses. The comma is what lets Python know this is a tuple value.
+(42,)
+type((42,))
+
+15. How can you get the tuple form of a list value? How can you get the list form of a tuple value?
+
+List to Tuple: 
+>>> myList = [4,5,6]
+>>> myTupleFromList = tuple(myList)
+>>> myTupleFromList
+(4, 5, 6)
+>>> type(myTupleFromList)
+<class 'tuple'>
+
+myTuple = ('a','b','c')
+myListFromTuple = list(myTuple)
+
+
+Tuple to List:
+>>> myTuple = ('a', 'b','c')
+>>> myTuple
+('a', 'b', 'c')
+>>> type(myTuple)
+<class 'tuple'>
+>>> myListFromTuple = list(myTuple)
+>>> myListFromTuple
+['a', 'b', 'c']
+>>> type(myListFromTuple)
+<class 'list'>
+
+16. Variables that “contain” list values don’t actually contain lists directly. What do they contain instead?
+Those variables contain the memory reference of the list.  
+
+17. What is the difference between copy.copy() and copy.deepcopy()?
+copy.copy() --> A shallow copy creates a new object which stores the reference of the original elements.
+So, a shallow copy doesn't create a copy of nested objects, instead it just copies the reference of nested objects.
+
+>>> cheese = [[1,2,3], [4,5,6]]
+>>> spam = copy.copy(cheese)
+>>> spam
+[[1, 2, 3], [4, 5, 6]]
+>>> cheese
+[[1, 2, 3], [4, 5, 6]]
+>>> cheese[1][1]=99
+>>> cheese
+[[1, 2, 3], [4, 99, 6]]
+>>> spam
+[[1, 2, 3], [4, 99, 6]]
+>>> id(cheese)
+2045113453440
+>>> id(spam)
+2045113581504
+
+copy.deepcopy() --> A deep copy creates a new object and recursively adds the copies of nested objects present in the original elements.
+
+>>> spam
+[[1, 2, 3], [4, 99, 6]]
+>>> cheese = copy.deepcopy(spam)
+>>> cheese
+[[1, 2, 3], [4, 99, 6]]
+>>> spam
+[[1, 2, 3], [4, 99, 6]]
+>>> spam[0][1] = 100
+>>> spam
+[[1, 100, 3], [4, 99, 6]]
+>>> cheese
+[[1, 2, 3], [4, 99, 6]]
+If you make changes to any nested objects in original object spam, you’ll see no changes to the copy cheese.
+

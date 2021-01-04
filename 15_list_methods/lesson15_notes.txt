@@ -92,7 +92,7 @@ append() --> add a values at the end of a list --> listname.append(value)
 >>> spam
 ['cat', 'dog', 'bat', 'moose']
 
-insert() --> inserts a value at a given position in a list. --> list.insertindex, value)
+insert() --> inserts a value at a given position in a list. --> list.insert(index, value)
 
 >>> spam
 ['cat', 'dog', 'bat', 'moose']
