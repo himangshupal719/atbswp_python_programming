@@ -26,3 +26,6 @@ https://www.python.org/
 
 Python Learning - Other link: 
 https://realpython.com/python-print/
+
+Pythons Game:
+https://github.com/asweigart/pythonstdiogames
