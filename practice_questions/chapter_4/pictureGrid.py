@@ -1,3 +1,20 @@
+# grid = [['.', '.', '.', '.', '.', '.'],
+#        ['.', 'O', 'O', '.', '.', '.'],
+#        ['O', 'O', 'O', 'O', 'O', '.'],
+#       ['.', 'O', 'O', 'O', 'O', 'O'],
+#        ['O', 'O', 'O', 'O', 'O', '.'],
+#      ['O', 'O', 'O', 'O', '.', '.'],
+#      ['.', 'O', 'O', '.', '.', '.'],
+#       ['.', '.', '.', '.', '.', '.']]
+# Copy the previous grid value, and write code that uses it to print the image.
+# Output image-
+#  ..OO.OO..
+#  .OOOOOOO.
+#  .OOOOOOO.
+#  ..OOOOO..
+#  ...OOO...
+#  ....O....
+
 def pictureGrid(grid):
     for y in range(6):
         print('')
