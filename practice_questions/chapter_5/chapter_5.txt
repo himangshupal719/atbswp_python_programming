@@ -1,0 +1,45 @@
+1. What does the code for an empty dictionary look like?
+{}
+
+2. What does a dictionary value with a key 'foo' and a value 42 look like?
+{'foo':42}
+
+3. What is the main difference between a dictionary and a list?
+- Unlike indexes for lists, indexes for dictionaries can use many different data types, not just integers. 
+- Unlike lists, items in dictionaries are unordered.While the order of items matters for determining whether two lists are the same, it does not matter in what order the key-value pairs are typed in a dictionary. Because dictionaries are not ordered, they can’t be sliced like lists.
+
+4. What happens if you try to access spam['foo'] if spam is {'bar': 100}?
+It will throw kyeError.
+
+5. If a dictionary is stored in spam, what is the difference between the expressions 'cat' in spam and 'cat' in spam.keys()?
+
+>>> spam = {'cat': 100}
+>>> 'cat' in spam
+True
+>>> 'cat' in spam.keys()
+True
+
+Ther is no difference. 
+'cat' in spam will check if the value 'cat' is a key in spam dictionary. 
+'cat' in spam.keys() is same as above . 'cat' is being checked for keys of the dictionary spam.
+
+6. If a dictionary is stored in spam, what is the difference between the expressions 'cat' in spam and 'cat' in spam.values()?
+'cat' in spam will check if the value 'cat' is a key in spam dictionary. 
+'cat' in spam will check if the value 'cat' is a value in spam dictionary. 
+
+7. What is a shortcut for the following code? 
+if 'color' not in spam:
+    spam['color'] = 'black'
+	
+spam.setdefault('color': 'black')
+	
+8. What module and function can be used to “pretty print” dictionary values?
+module - pprint
+function - pprint 
+import pprint
+pprint.pprint(spam) 
+
+>>> import pprint
+>>> pprint.pprint(spam)
+{'cat': 100, 'color': 'black'}
+
