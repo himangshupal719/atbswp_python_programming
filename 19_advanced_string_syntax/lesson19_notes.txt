@@ -1,0 +1,167 @@
+- Use a quote inside a string 
+'That is Alice's cat.' --> Error because Python thinks the string ends after Alice, and the rest (s cat.') is invalid Python code. 
+
+Double Quotes: Strings can begin and end with double quotes, just as they do with single quotes.
+Benefit: String can have single quote characters in it.
+
+>>> spam = "That is Alice's cat."
+>>> spam
+"That is Alice's cat."
+
+If you need to use both single quotes and double quotes in the string, you’ll need to use escape characters.
+
+- Escape Characters
+An escape character lets you use characters that are otherwise impossible to put into a string.
+An escape character consists of a backslash (\) followed by the character you want to add to the string.
+
+>>> spam = 'Say hi to Bob\'s mother.'
+>>> spam
+"Say hi to Bob's mother."
+
+Python knows that since the single quote in Bob\'s has a backslash, it is not a single quote meant to end the string value. The escape characters \' and \" let you put single quotes and double quotes inside your strings, respectively.
+
+Escape character			Prints as
+==================================================
+\'					Single quote
+\"					Double quote
+\t					Tab
+\n					Newline(line break)
+\\					Backslash
+
+>>> print("Hello there!\nHow are you?\nI\'m doing file.")
+Hello there!
+How are you?
+I'm doing file.
+
+- Raw Strings
+You can place an r before the beginning quotation mark of a string to make it a raw string. A raw string completely ignores all escape characters and prints any backslash that appears in the string. 
+
+>>> print(r'That is Carol\'s cat.')
+That is Carol\'s cat.
+>>> 
+
+Because this is raw string, Python considers the backslash as part of the string and not as the start of an escape character. 
+
+Raw strings are usefule when - 
+1. typing file paths - r'C:\Users\Himangshu\Desktop'
+2. regular expresiios. 
+
+- Multiline STrings With Triple Quotes
+A multiline string in Python begins and ends with either three single quotes or three double quotes.
+Any quotes, tabs, or newlines in between the''triple quote'' are considered part of the string.
+
+With Triple quote: 
+
+>>> print('''Dear Alice,)
+
+
+Eve's cat has been arrested for catnapping, cat burglary, and extortion.
+
+Sicerely,
+Bob''')
+Dear Alice,)
+
+
+Eve's cat has been arrested for catnapping, cat burglary, and extortion.
+
+Sicerely,
+Bob
+
+
+Without Triple quote: 
+>>> print('Dear Alice,\n\nEve\'s cat has been arrested for catnapping, cat burglary, and extortion.\n\nSincerely,\nBob')
+Dear Alice,
+
+Eve's cat has been arrested for catnapping, cat burglary, and extortion.
+
+Sincerely,
+Bob
+
+
+
+- Indexing and Slicing Strings
+Strings use indexes and slices the same way lists do. 
+
+' H e l l o ,  w o r l d ! '
+  0 1 2 3 4 5 6 7 8 9 10 11 12 
+
+>>> spam = 'Hello, world!'
+>>> spam[0]
+'H'
+>>> spam[1]
+'e'
+>>> spam[2]
+'l'
+>>> spam[-1]
+'!'
+>>> spam[0:5]
+'Hello'
+>>> spam[:6]
+'Hello,'
+>>> spam[7:]
+'world!'
+>>> 
+
+1. If you specify an index, you’ll get the character at that position in the string. 
+2. If you specify a range from one index to another, the starting index is included and the ending index is not. This is similar to how range(5) will cause a for loop to iterate up to, but not including, 5.
+3. Note that slicing a string does not modify the original string. You can capture a slice from one variable in a separate variable.
+
+
+>>> spam
+'Hello, world!'
+>>> fizz = spam[0:5]
+>>> fizz
+'Hello'
+>>> 
+
+
+- The 'in' and 'not in' Operators with Strings.
+The in and not in operators can be used with strings just like with list values.in or not in will evaluate to a Boolean True or False. 
+
+>>> 'Hello' in 'Hello, World'
+True
+>>> 'Hello' in 'Hello'
+True
+>>> 'HELLO' in 'Hello, World'
+False
+>>> spam
+'Hello, world!'
+>>> ' ' in spam
+True
+>>> 'cats' not in 'cats and dogs'
+False
+>>> 
+
+These expressions test whether the first string (the exact string, case-sensitive) can be found within the second string.
+
+- Putting Strings Inside Other Strings
+
+>>> 'Hello, my name is ' + name + '. I am ' + str(age) + ' years old.'
+'Hello, my name is Himangshu. I am 4000 years old.'
+
+This require tedious typing. A simpler approach is String Interpolation, in which %s operator inside the string acts as a marker to be replaced by values following the string.
+
+One benefit of stirng interpolation is that str() doesn't have to be called to convert values to strings. 
+
+>>> name = 'Himangshu'
+>>> age = 4000
+>>> 'My name is %s. I am %s years old.' %(name, age)
+'My name is Himangshu. I am 4000 years old.'
+
+f-string (python3.6) - Python 3.6 introduced f-strings, which is similar to string interpolation except that braces are used instead of %s, with the expresion placed directly inside the braces. 
+
+Like raw string f-string has an f prefix before the starting quotation mark. 
+
+>>> name
+'Himangshu'
+>>> age
+4000
+>>> f'My name is {name}. Next year I will be {age+1}'
+'My name is Himangshu. Next year I will be 4001'
+
+Remember to include f prefix other wise the brackets and contents will be part of the string values. 
+
+>>> 'My name is {name}. Next year I will be {age+1}'
+'My name is {name}. Next year I will be {age+1}'
+
+- Useful String Methods

@@ -29,3 +29,6 @@ https://realpython.com/python-print/
 
 Pythons Game:
 https://github.com/asweigart/pythonstdiogames
+
+Python Reference:
+https://python-reference.readthedocs.io/en/latest/intro.html
