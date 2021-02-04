@@ -164,4 +164,4 @@ Remember to include f prefix other wise the brackets and contents will be part o
 >>> 'My name is {name}. Next year I will be {age+1}'
 'My name is {name}. Next year I will be {age+1}'
 
-- Useful String Methods
+- Useful String Methods --> To be continued in lesson 20.
