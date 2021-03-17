@@ -32,3 +32,7 @@ https://github.com/asweigart/pythonstdiogames
 
 Python Reference:
 https://python-reference.readthedocs.io/en/latest/intro.html
+
+Videos: 
+
+Ned Batchelder’s 2012 PyCon talk on Unicode and code points, “Pragmatic Unicode, or, How Do I Stop the Pain?” at https://youtu.be/sgHbC6udIqc.

@@ -44,22 +44,25 @@ Because this is raw string, Python considers the backslash as part of the string
 
 Raw strings are usefule when - 
 1. typing file paths - r'C:\Users\Himangshu\Desktop'
-2. regular expresiios. 
+2. regular expresions. 
 
-- Multiline STrings With Triple Quotes
+- Multiline Strings With Triple Quotes
 A multiline string in Python begins and ends with either three single quotes or three double quotes.
-Any quotes, tabs, or newlines in between the''triple quote'' are considered part of the string.
+Any quotes, tabs, or newlines in between the'''triple quote''' are considered part of the string.
 
 With Triple quote: 
 
->>> print('''Dear Alice,)
+>>> print('''Dear Alice,
 
 
 Eve's cat has been arrested for catnapping, cat burglary, and extortion.
 
 Sicerely,
 Bob''')
-Dear Alice,)
+
+
+
+Dear Alice,
 
 
 Eve's cat has been arrested for catnapping, cat burglary, and extortion.
@@ -136,6 +139,8 @@ These expressions test whether the first string (the exact string, case-sensitiv
 
 - Putting Strings Inside Other Strings
 
+>>> name = 'Himangshu'
+>>> age = 400
 >>> 'Hello, my name is ' + name + '. I am ' + str(age) + ' years old.'
 'Hello, my name is Himangshu. I am 4000 years old.'
 
