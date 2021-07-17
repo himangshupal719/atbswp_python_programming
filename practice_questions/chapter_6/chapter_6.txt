@@ -1,0 +1,25 @@
+1. What are escape characters?
+--> Escape characters helps to use characters in strings which are otherwise impossible to put into string. An escape character consists fo back slash (\) followed by the character we want to add to the string. 
+
+Escape characters - \', \", \n, \t, \\
+
+2. What do the \n and \t escape characters represent?
+--> \n - Escapes newline character or line break
+	\t - Escapes tab.
+
+3. How can you put a \ backslash character in a string?
+--> \\
+
+4. The string value "Howl's Moving Castle" is a valid string. Why isn’t it a problem that the single quote character in the word Howl's isn’t escaped?
+--> The above string is inside double quotes. 
+
+5. If you don’t want to put \n in your string, how can you write a string with newlines in it?
+--> Multiline string with tripple quotes - either double or single. 
+
+6. What do the following expressions evaluate to?
+
+- 'Hello, world!'[1] --> e
+- 'Hello, world!'[0:5] --> Hello
+- 'Hello, world!'[:5] --> Hello
+- 'Hello, world!'[3:] --> lo, world!
+

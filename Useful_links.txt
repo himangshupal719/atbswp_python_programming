@@ -5,6 +5,10 @@ gist.github.com
 Automate the boring stuff with Python:
 https://automatetheboringstuff.com/
 
+Currently at: 
+https://automatetheboringstuff.com/2e/chapter6/
+
+
 To view the execution of a program using the Python Tutor visualization tool:
 http://pythontutor.com/
 https://autbor.com/
