@@ -1,5 +1,5 @@
 1. What are escape characters?
---> Escape characters helps to use characters in strings which are otherwise impossible to put into string. An escape character consists fo back slash (\) followed by the character we want to add to the string. 
+--> Escape characters helps to use characters in strings which are otherwise impossible to put into string. An escape character consists of back slash (\) followed by the character we want to add to the string. 
 
 Escape characters - \', \", \n, \t, \\
 
@@ -23,3 +23,22 @@ Escape characters - \', \", \n, \t, \\
 - 'Hello, world!'[:5] --> Hello
 - 'Hello, world!'[3:] --> lo, world!
 
+7. What do the following expressions evaluate to?
+
+- 'Hello'.upper() --> HELLO
+- 'Hello'.upper().isupper() --> False
+- 'Hello'.upper().lower() --> hello
+
+8. What do the following expressions evaluate to?
+
+- 'Remember, remember, the fifth of November.'.split() --> ['Remember,','remember,','the','fifth','of','November.']
+'-'.join('There can be only one.'.split()) --> ['There','can','be','only','one.'] --> 'There-can-be-only-one.'
+
+9. What string methods can you use to right-justify, left-justify, and center a string?
+-->rjust(), ljust(), center()
+
+10. How can you trim whitespace characters from the beginning or end of a string?
+--> 
+- end of string - rstrip(), 
+- begining of string - lstrip(), 
+- end and begining of stgring - strip()
