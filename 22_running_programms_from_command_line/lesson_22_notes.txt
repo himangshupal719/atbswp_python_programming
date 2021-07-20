@@ -1,0 +1,23 @@
+Create a .py file with shebang line (#! python3) --> python3 is the version. 
+
+
+C:\Users\himan>py.exe C:\Users\himan\OneDrive\Documents\Interview_Prep\My_Learning_Cognizant\atbswpython\atbswp_python_programming\chapter_projects\hello.py
+Hellow World!
+
+run and give the above instead of command line.
+
+pause.exe
+
+Batch files 
+
+If we do not need command prompt to appear for example clipboard copy, use @pyw and no need to use @pause at the end. 
+
+to run from Run windoew - py batch file path
+
+to get rid of that path of the batch file - add the directory which contains the batch in environment variables. 
+
+To pass arguments through command line - 
+hello argv1 argv2 argv3 
+
+
+%* to pass any command line agrumant to .py module from .bat module

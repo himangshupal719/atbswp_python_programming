@@ -40,3 +40,11 @@ https://python-reference.readthedocs.io/en/latest/intro.html
 Videos: 
 
 Ned Batchelder’s 2012 PyCon talk on Unicode and code points, “Pragmatic Unicode, or, How Do I Stop the Pain?” at https://youtu.be/sgHbC6udIqc.
+
+
+Game zombie Dice:  Will see later.
+https://github.com/asweigart/zombiedice/
+
+Projects works - Fun: 
+https://www.instructables.com/
+
