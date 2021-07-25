@@ -1,0 +1,176 @@
+Optional Matching with the Question Mark
+-------------------------------------------
+
+Sometimes there is a pattern that you want to match only optionally. That is, the regex should find a match regardless of whether that bit of text is there. The ? character flags the group that precedes it as an optional part of the pattern. 
+
+>>> batRegex = re.compile(r'Bat(wo)?man')
+>>> mo1 = batRegex.search('The Adventures of Batman')
+>>> mo1.group()
+'Batman'
+>>> mo2 = batRegex.search('The Adventures of Batwoman')
+>>> mo2.group()
+'Batwoman'
+>>> 
+
+The (wo)? part of the regular expression means that the pattern wo is an optional group. 
+The regex will match text that has zero instances or one instance of wo in it.
+
+>>> mo3 = batRegex.search('The adventures of Batwowowowman')
+>>> mo3==None
+True
+
+Using the earlier phone number example, you can make the regex look for phone numbers that do or do not have an area code.
+
+>>> phoneRegex = re.compile(r'(\d\d\d-)?\d\d\d-\d\d\d\d')
+>>> mo1 = phoneRegex.search('My number is 415-555-1234')
+>>> mo1.group()
+'415-555-1234'
+>>> mo2 = phoneRegex.search('My number is 555-1234')
+>>> mo2.group()
+'555-1234'
+
+You can think of the ? as saying, “Match zero or one of the group preceding this question mark.”
+
+If you need to match an actual question mark character, escape it with \?.
+
+Matching Zero or More wit the Star *
+-----------------------------------------
+The * means “match zero or more”—the group that precedes the star can occur any number of times in the text. It can be completely absent or repeated over and over again. 
+
+>>> batRegex = re.compile(r'Bat(wo)*man')
+>>> mo1 = batRegex.search('The adventure of Batman')
+>>> mo1.group()
+'Batman'
+>>> mo2 = batRegex.search('The adventures of Batwoman')
+>>> mo2.group()
+'Batwoman'
+>>> mo3 = batRegex.search('The adventuers of Batwowowowoman')
+>>> mo3.group()
+'Batwowowowoman'
+
+For 'Batman', the (wo)* part of the regex matches zero instances of wo in the string; for 'Batwoman', the (wo)* matches one instance of wo; and for 'Batwowowowoman', (wo)* matches four instances of wo.
+
+If you need to match an actual star character, prefix the star in the regular expression with a backslash, \*.
+
+
+Matching One or More with Plus
+------------------------------
+
+While * means “match zero or more,” the + (or plus) means “match one or more.”
+
+Unlike the star, which does not require its group to appear in the matched string, the group preceding a plus must appear at least once. It is not optional.
+
+>>> batRegex = re.compile(r'Bat(wo)+man')
+>>> mo1 = batRegex.search('The adventures of Batman')
+>>> mo1 == None
+True
+>>> 
+>>> mo2 = batRegex.search('The adventures of Batwoman')
+>>> mo2 ==None
+False
+>>> mo2.group()
+'Batwoman'
+>>> mo3 = batRegex.search('The adventuers of Batwowowowoman')
+>>> mo3.group()
+'Batwowowowoman'
+
+The regex Bat(wo)+man will not match the string 'The Adventures of Batman', because at least one wo is required by the plus sign.
+
+If you need to match an actual plus sign character, prefix the plus sign with a backslash to escape it: \+.
+
+
+Escaping +*?
+-----------------
+>>> regex = re.compile(r'\*\+\?')
+>>> mo1 = regex.search('I learned about *+? regex syntax')
+>>> mo1.group()
+'*+?'
+
+>>> regex = re.compile(r'(\*\+\?)+')
+>>> mo2 = regex.search('I learned about *+?*+?*+? regex syntax')
+>>> mo2.group()
+'*+?*+?*+?'
+
+Created group thatneeds to appear 1 or more times. 
+
+
+
+Matching Specific Reprtitions with Braces
+----------------------------------------------
+If you have a group that you want to repeat a specific number of times, follow the group in your regex with a number in braces. For example, the regex (Ha){3} will match the string 'HaHaHa', but it will not match 'HaHa', since the latter has only two repeats of the (Ha) group.
+
+>>> haRegex = re.compile(r'(Ha){3}')
+>>> mo1 = haRegex.search('He said HaHaHa')
+>>> mo1.group()
+'HaHaHa'
+>>> mo2 = haRegex.search('He said HaHaHaHa')
+>>> mo2 == None
+False
+>>> mo2.group()
+'HaHaHa'
+>>> haRegex = re.compile(r'HaHaHa')
+>>> mo3 = haRegex.search('He said HaHaHa')
+>>> mo3.group()
+'HaHaHa'
+>>> 
+>>> 
+>>> 
+>>> 
+>>> haRegex = re.compile(r'(Ha){3}')
+>>> mo3 = haRegex.search('He said HaHa')
+>>> mo3 == None
+True
+
+>>> phoeRegex = re.compile(r'((\d\d\d-)?\d\d\d-\d\d\d\d(,)?){3}')
+>>> phoeRegex.search('My numbers are 415-555-1234,555-1234,434-444-5465')
+<re.Match object; span=(15, 49), match='415-555-1234,555-1234,434-444-5465'>
+>>> mo = phoeRegex.search('My numbers are 415-555-1234,555-1234,434-444-5465')
+>>> mo.group()
+'415-555-1234,555-1234,434-444-5465'
+
+>>> phoeRegex
+re.compile('((\\d\\d\\d-)?\\d\\d\\d-\\d\\d\\d\\d){3}')
+>>> mo = phoeRegex.search('My numbers are 415-555-3434333-2342122-332-3333')
+>>> mo
+<re.Match object; span=(15, 47), match='415-555-3434333-2342122-332-3333'>
+
+
+>>> haRegex = re.compile(r'(Ha){3,5}')
+>>> haRegex = re.compile(r'(Ha){,5}')
+>>> haRegex.search('HaHaHaHa')
+<re.Match object; span=(0, 8), match='HaHaHaHa'>
+>>> 
+>>> 
+>>> haRegex = re.compile(r'(Ha){3,}')
+>>> haRegex.search('HaHaHaHaHaHaHa')
+<re.Match object; span=(0, 14), match='HaHaHaHaHaHaHa'>
+
+
+
+
+Greedy and Non-Greedy Matching
+-----------------------------------
+
+Since (Ha){3,5} can match three, four, or five instances of Ha in the string 'HaHaHaHaHa',you may wonder why the Match object’s call to group() in the previous brace example returns 'HaHaHaHaHa' instead of the shorter possibilities.
+
+After all, 'HaHaHa' and 'HaHaHaHa' are also valid matches of the regular expression (Ha){3,5}.
+
+Python’s regular expressions are greedy by default, which means that in ambiguous situations they will match the longest string possible. 
+
+The non-greedy (also called lazy) version of the braces, which matches the shortest string possible, has the closing brace followed by a question mark.
+
+>>> digitRegex = re.compile(r'(\d){3,5}')
+>>> digitRegex.search('1234567890')
+<re.Match object; span=(0, 5), match='12345'>
+>>> digitRegex = re.compile(r'\d{3,5}?')
+>>> digitRegex.search('1234567890')
+<re.Match object; span=(0, 3), match='123'>
+
+>>> haRegex = re.compile(r'(Ha){3,5}')
+>>> haRegex.search('HaHaHaHaHaHa')
+<re.Match object; span=(0, 10), match='HaHaHaHaHa'>
+>>> haRegex = re.compile(r'(Ha){3,5}?')
+>>> haRegex.search('HaHaHaHaHaHa')
+<re.Match object; span=(0, 6), match='HaHaHa'>
+
+Note that the question mark can have two meanings in regular expressions: declaring a non-greedy match or flagging an optional group.

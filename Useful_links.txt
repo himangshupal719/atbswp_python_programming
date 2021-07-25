@@ -48,3 +48,9 @@ https://github.com/asweigart/zombiedice/
 Projects works - Fun: 
 https://www.instructables.com/
 
+Regular expression: 
+https://pythex.org/
+
+Files used in Automate the borig Stuff book - 
+https://nostarch.com/automatestuff2/
+
