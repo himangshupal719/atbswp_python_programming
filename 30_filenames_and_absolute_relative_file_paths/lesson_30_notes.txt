@@ -1,0 +1,203 @@
+A file has two key properties: a filename (usually written as one word) and a path.
+
+
+Also note that while folder names and filenames are not case-sensitive on Windows and macOS, they are case-sensitive on Linux.
+
+Backslash on Windows and Forward Slash on macOS and Linux
+-------------------------------------------------------------
+On Windows, paths are written using backslashes (\) as the separator between folder names. The macOS and Linux operating systems, however, use the forward slash (/) as their path separator. 
+
+If you want your programs to work on all operating systems, you will have to write your Python scripts to handle both cases.
+
+Fortunately, this is simple to do with the os.path.join() function. If you pass it the string values of individual file and folder names in your path, os.path.join() will return a string with a file path using the correct path separators. 
+
+>>> import os
+>>> os.path.join('usr', 'bin', 'spam')
+'usr\\bin\\spam'
+
+I’m running these interactive shell examples on Windows, so os.path.join('usr', 'bin', 'spam') returned 'usr\\bin\\spam'. (Notice that the backslashes are doubled because each backslash needs to be escaped by another backslash character.)
+
+If I had called this function on OS X or Linux, the string would have been 'usr/bin/spam'.
+
+The os.path.join() function is helpful if you need to create strings for filenames.For example, the following example joins names from a list of filenames to the end of a folder’s name:
+
+>>> myFiles = ['accounts.txt', 'details.csv', 'invite.docx']
+>>> for filename in myFiles:
+	print(os.path.join('C:\\Users\\himan', filename))
+
+The Current Working Directory
+-----------------------------
+Every program that runs on your computer has a current working directory, or cwd. You can get the current working directory as a string value with the os.getcwd() function and change it with os.chdir().
+
+>>> import os
+>>> os.getcwd()
+'C:\\Users\\himan\\OneDrive\\Documents\\Interview_Prep\\My_Learning_Cognizant\\atbswpython\\atbswp_python_programming\\30_filenames_and_absolute_relative_file_paths'
+
+>>> os.chdir('C:\\Users\\himan\\OneDrive\\Documents\\CA')
+>>> os.getcwd()
+'C:\\Users\\himan\\OneDrive\\Documents\\CA'
+
+Python will display an error if you try to change to a directory that does not exist.
+
+>>> os.chdir('C:\\ThisFolderDoesNotExist')
+Traceback (most recent call last):
+  File "<pyshell#72>", line 1, in <module>
+    os.chdir('C:\\ThisFolderDoesNotExist')
+FileNotFoundError: [WinError 2] The system cannot find the file specified: 'C:\\ThisFolderDoesNotExist'
+
+
+
+Absolute vs Relative Path
+----------------------------
+
+- An absolute path, which always begins with the root folder
+- A relative path, which is relative to the program’s current working directory
+
+There are also the dot (.) and dot-dot (..) folders. These are not real folders but special names that can be used in a path.
+
+- A single period (“dot”) for a folder name is shorthand for “this directory.”
+- Two periods (“dot-dot”) means “the parent folder.”
+
+The .\ at the start of a relative path is optional. For example, .\spam.txt and spam.txt refer to the same file.
+
+Creating New Folders With od.makedirs()
+------------------------------------------
+
+Your programs can create new folders (directories) with the os.makedirs() function. 
+
+>>> os.makedirs('test')
+>>> os.makedirs('C:\\Users\\himan\\OneDrive\\Documents\\Aurora\\testdir')
+
+>>> os.makedirs('C:\\Users\\himan\\OneDrive\\Documents\\python_os_module')
+>>> os.chdir('C:\\Users\\himan\\OneDrive\\Documents\\python_os_module')
+>>> os.getcwd()
+'C:\\Users\\himan\\OneDrive\\Documents\\python_os_module'
+>>> 
+
+os.path Module
+----------------
+The os.path module contains many helpful functions related to filenames and file paths. For instance, you’ve already used os.path.join() to build paths in a way that will work on any operating system. Since os.path is a module inside the os module, you can import it by simply running import os. Whenever your programs need to work with files, folders, or file paths, you can refer to the short examples in this section.
+
+
+Handling Absolute and Relative Paths
+-------------------------------------
+
+The os.path module provides functions for returning the absolute path of a relative path and for checking whether a given path is an absolute path.
+
+- Calling os.path.abspath(path) will return a string of the absolute path of the argument. This is an easy way to convert a relative path into an absolute one.
+
+- Calling os.path.isabs(path) will return True if the argument is an absolute path and False if it is a relative path.
+
+- Calling os.path.relpath(path, start) will return a string of a relative path from the start path to path. If start is not provided, the current working directory is used as the start path.
+
+>>> os.path.abspath('.')
+'C:\\Users\\himan\\OneDrive\\Documents\\python_os_module'
+>>> os.path.abspath('.\\Scripts')
+'C:\\Users\\himan\\OneDrive\\Documents\\python_os_module\\Scripts'
+>>> os.path.isabs('.')
+False
+>>> os.path.isabs(os.path.abspath('../'))
+True
+
+>>> os.path.relpath('C:\\Windows', 'C:\\')
+'Windows'
+>>> os.path.relpath('c:\\Windows', 'c:\\Users\\himan')
+'..\\..\\Windows'
+>>> os.getcwd()
+'C:\\Users\\himan\\OneDrive\\Documents\\python_os_module'
+
+
+- Calling os.path.dirname(path) will return a string of everything that comes before the last slash in the path argument. 
+
+- Calling os.path.basename(path) will return a string of everything that comes after the last slash in the path argument.
+
+>>> path = 'c:\\Windows\\System32\\calc.exe'
+>>> os.path.dirname(path)
+'c:\\Windows\\System32'
+>>> os.path.basename(path)
+'calc.exe'
+
+
+If you need a path’s dir name and base name together, you can just call os.path.split() to get a tuple value with these two strings.
+
+>>> calcFilePath = 'c:\\Windows\\System32\\calc.exe'
+>>> os.path.split(calcFilePath)
+('c:\\Windows\\System32', 'calc.exe')
+
+otice that you could create the same tuple by calling os.path.dirname() and os.path.basename() and placing their return values in a tuple.
+
+>>> 
+>>> (os.path.dirname(calcFilePath), os.path.basename(calcFilePath))
+('c:\\Windows\\System32', 'calc.exe')
+>>> 
+
+Also, note that os.path.split() does not take a file path and return a list of strings of each folder. For that, use the split() string method and split on the string in os.sep. Recall from earlier that the os.sep variable is set to the correct folder-separating slash for the computer running the program.
+
+The split() string method will work to return a list of each part of the path. It will work on any operating system if you pass it os.path.sep.
+
+>>> calcFilePath.split(os.path.sep)
+['c:', 'Windows', 'System32', 'calc.exe']
+>>> os.path.sep
+'\\'
+
+
+Finding File Size and Folder Contents
+---------------------------------------
+
+The os.path module provides functions for finding the size of a file in bytes and the files and folders inside a given folder.
+
+- Calling os.path.getsize(path) will return the size in bytes of the file in the path argument.
+- Calling os.listdir(path) will return a list of filename strings for each file in the path argument. (Note that this   function is in the os module, not os.path.)
+
+>>> os.chdir('C:\\Users\\himan\\OneDrive\\Documents\\Interview_Prep\\My_Learning_Cognizant\\atbswpython\\atbswp_python_programming\\30_filenames_and_absolute_relative_file_paths')
+>>> os.getcwd()
+'C:\\Users\\himan\\OneDrive\\Documents\\Interview_Prep\\My_Learning_Cognizant\\atbswpython\\atbswp_python_programming\\30_filenames_and_absolute_relative_file_paths'
+>>> os.listdir('C:\\Users\\himan\\OneDrive\\Documents\\Interview_Prep\\My_Learning_Cognizant\\atbswpython\\atbswp_python_programming\\30_filenames_and_absolute_relative_file_paths')
+['lesson30-recap.txt', 'lesson_30_notes.txt', 'test']
+>>> 
+
+
+If I want to find the total size of all the files in this directory, I can use os.path.getsize() and os.listdir() together.
+
+>>> totalSize = 0
+>>> for filename in os.listdir('C:\\Users\\himan\\OneDrive\\Documents\\Interview_Prep\\My_Learning_Cognizant\\atbswpython\\atbswp_python_programming'):
+	totalSize = totalSize + os.path.getsize(os.path.join('C:\\Users\\himan\\OneDrive\\Documents\\Interview_Prep\\My_Learning_Cognizant\\atbswpython\\atbswp_python_programming',filename))
+
+
+>>> print(totalSize)
+127494
+>>> 
+
+
+Checking Path Validity
+---------------------------
+
+Many Python functions will crash with an error if you supply them with a path that does not exist. The os.path module provides functions to check whether a given path exists and whether it is a file or folder.
+
+- Calling os.path.exists(path) will return True if the file or folder referred to in the argument exists and will return False if it does not exist.
+
+- Calling os.path.isfile(path) will return True if the path argument exists and is a file and will return False otherwise.
+
+- Calling os.path.isdir(path) will return True if the path argument exists and is a folder and will return False otherwise.
+>>> os.path.exists('c:\\Windows')
+True
+>>> os.path.existsO('c:\\some_made_up_folder')
+False
+>>> os.path.exists('c:\\some_made_up_folder')
+False
+>>> os.path.isdir('c:\\Windows\\System32')
+True
+>>> os.path.isfile('c:\\Windows\\System32\\calc.exe)
+	       
+SyntaxError: EOL while scanning string literal
+>>> os.path.isfile('c:\\Windows\\System32\\calc.exe')
+True
+>>> os.path.isdir('c:\\Windows\\System32\\calc.exe')
+False
+>>> os.path.isfile('c:\\Windows\\System32')
+False
+
+You can determine whether there is a DVD or flash drive currently attached to the computer by checking for it with the os.path.exists() function. For instance, if I wanted to check for a flash drive with the volume named D:\ on my Windows computer, I could do that with the following:
+
+>>> os.path.exists('D:\\')
+False

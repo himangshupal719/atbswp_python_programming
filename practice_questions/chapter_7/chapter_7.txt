@@ -1,0 +1,159 @@
+1. What is the function that creates Regex objects? 
+Ans. re.compile()
+
+2. Why are raw strings often used when creating Regex objects? 
+Ans. Python raw string treats backslash(\) as a literal character. It is useful when we want to have a string that contains backslash(\) and don’t want it to be treated as an escape character.
+	 Regex often uses backslash(\) to indicate special characters and it gets messy without a raw string. Regular Expressions usually contain a lot of backslashes(\). When using Python’s “re” module , 
+	 regular expressions are represented as strings. So, like all strings with a lot of backslashes, they are more readable when written in raw literal form.
+
+3. What does the search() method return?
+Ans. A Regex object’s search() method searches the string it is passed for any matches to the regex. The search() method will return None if the regex pattern is not found in the string. If the pattern 
+	is found, the search() method returns a Match object, which have a group() method that will return the actual matched text from the searched string.
+
+4. How do you get the actual strings that match the pattern from a Match object?
+Ans. Call the Match object’s group() method to return a string of the actual matched text.
+
+5. In the regex created from r'(\d\d\d)-(\d\d\d-\d\d\d\d)', what does group 0 cover? Group 1? Group 2?
+And. group(0)- Entire matched text.
+	group(1) - First matching group corresponmding to (\d\d\d)
+	group(2) - Second matching group corresponding to (\d\d\d-\d\d\d\d)
+
+6. Parentheses and periods have specific meanings in regular expression syntax. How would you specify that you want a regex to match actual parentheses and period characters?
+Ans. By escaping parentheses and periods with back slash - r'(\(Parentheses\))' and r'(\.)'
+
+7. The findall() method returns a list of strings or a list of tuples of strings. What makes it return one or the other?
+Ans. findall() method will return the strings of every match in the searched string. It does not return matched object but a but a list of strings as long as there are no groups in the regular expression. 
+	If there are groups in the regular expression, then findall() will return a list of tuples. Each tuple represents a found match, and its items are the matched strings for each group in the regex.
+ 
+8. What does the | character signify in regular expressions?
+Ans. We can use Pipe to match one of many expressions and one of several patterns as part of your regex.
+
+9. What two things does the ? character signify in regular expressions?
+Ans. The ? character flags the group that precedes it as an optional part of the pattern. The regex will match text that has zero instances or one instance. matches zero or one of the preceding group.
+	{n,m}? or *? or +? performs a non-greedy match of the preceding group.
+
+10. What is the difference between the + and * characters in regular expressions?
+Ans. + = matches one or more of the preceding group.
+	* = matches zero or more of the preceding group.
+
+11. What is the difference between {3} and {3,5} in regular expressions?
+Ans. {3} = matches exactly 3 times of the preceding group.
+	{3,5} = matches at least 3 and at most 5 of the preceding group.
+
+12. What do the \d, \w, and \s shorthand character classes signify in regular expressions?
+Ans. \d - Any numeric digit from 0 to 9.
+	\w - Any letter, numeric digit, or the underscore character. (Think of this as matching “word” characters.)
+	\s - Any space, tab, or newline character. (Think of this as matching “space” characters.)
+
+13. What do the \D, \W, and \S shorthand character classes signify in regular expressions?
+Ans. \D - Any character that is not a numeric digit from 0 to 9.
+	\W - Any character that is not a letter, numeric digit, or the underscore character.
+	\S - Any character that is not a space, tab, or newline.
+
+14. What is the difference between .* and .*??
+Ans. .* - match everything and anything. You can use the dot-star (.*) to stand in for that “anything.” Remember that the dot character means “any single character except the newline,” and the star character means “zero or more of the preceding character.”
+		The dot-star uses greedy mode: It will always try to match as much text as possible.  
+	.*? - To match any and all text in a non-greedy fashion, use the dot, star, and question mark (.*?). 
+
+15. What is the character class syntax to match all numbers and lowercase letters?
+Ans. [0-9a-z]
+
+16. How do you make a regular expression case-insensitive?
+Ans. To make regex case-insensitive, we can pass re.IGNORECASE or re.I as a second argument to re.compile().
+
+17. What does the . character normally match? What does it match if re.DOTALL is passed as the second argument to re.compile()?
+Ans. match any character except for a newline.  dot character will match just one characte. 
+	By passing re.DOTALL as the second argument to re.compile(), you can make the dot character match all characters, including the newline character.
+
+18. If numRegex = re.compile(r'\d+'), what will numRegex.sub('X', '12 drummers, 11 pipers, five rings, 3 hens') return?
+Ans. 'X drummers, X pipers, five rings, X hens'
+
+19. What does passing re.VERBOSE as the second argument to re.compile() allow you to do?
+Ans. YBy passinf re.VERBOSE as the second argument to re.compile() function to ignore whitespace and comments inside the regular expression string. 
+
+20. How would you write a regex that matches a number with commas for every three digits? It must match the following:
+
+'42'
+'1,234'
+'6,368,745'
+but not the following:
+
+'12,34,567' (which has only two digits between the commas)
+'1234' (which lacks commas)
+
+Ans. 
+import re
+
+commaRegex = re.compile(r'(^\d{1,3}(,\d{3})*$)')
+match = commaRegex.findall('1,123,232,999')
+#match = commaRegex.findall('42')
+#match = commaRegex.findall('1,234')
+#match = commaRegex.findall('6,368,745')
+#match = commaRegex.findall('12,34,567')
+#match = commaRegex.findall('1234')
+print(match)
+for numbers in match:
+    print(numbers[0])
+
+
+21. How would you write a regex that matches the full name of someone whose last name is Watanabe? You can assume that the first name that comes before it will always be one word that begins with a capital letter. The regex must match the following:
+
+'Haruto Watanabe'
+'Alice Watanabe'
+'RoboCop Watanabe'
+but not the following:
+
+'haruto Watanabe' (where the first name is not capitalized)
+'Mr. Watanabe' (where the preceding word has a nonletter character)
+'Watanabe' (which has no first name)
+'Haruto watanabe' (where Watanabe is not capitalized)
+
+Ans. 
+import re
+nameList = ['Haruto Watanabe', 'Alice Watanabe', 'RoboCop Watanabe',
+        'haruto Watanabe' , 'Mr. Watanabe', 'Watanabe','Haruto watanabe']
+nameRegex = re.compile(r'([A-Z])[a-zA-Z]*\sWatanabe')
+
+for  name in nameList:
+    mo = nameRegex.search(name)
+    if mo ==None:
+        print(f'{name} does not match.')
+    else:
+        print(f'{name} does match.')
+
+22. How would you write a regex that matches a sentence where the first word is either 
+Alice, Bob, or Carol; 
+the second word is either eats, pets, or throws; 
+the third word is apples, cats, or baseballs; 
+and the sentence ends with a period? This regex should be case-insensitive. It must match the following:
+
+'Alice eats apples.'
+'Bob pets cats.'
+'Carol throws baseballs.'
+'Alice throws Apples.'
+'BOB EATS CATS.'
+but not the following:
+
+'RoboCop eats apples.'
+'ALICE THROWS FOOTBALLS.'
+'Carol eats 7 cats.'
+
+Ans.
+import re
+
+testList = ['Alice eats apples.',
+'Bob pets cats.',
+'RoboCop eats apples.',
+'ALICE THROWS FOOTBALLS.',
+'Carol throws baseballs.',
+'Alice throws Apples.',
+ 'Carol eats 7 cats.',
+'BOB EATS CATS.']
+
+sentenceRegex = re.compile(r'(alice|bob|carol)\s(eats|pets|throws)\s(apples|cats|baseballs)\.', re.IGNORECASE)
+for sentence in testList:
+    mo = sentenceRegex.search(sentence)
+    if mo == None:
+        print(f'\'{sentence }\' is not a match.')
+    else:
+        print(f'\'{sentence }\' is a match.')

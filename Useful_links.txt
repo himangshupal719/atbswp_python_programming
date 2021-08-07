@@ -50,7 +50,11 @@ https://www.instructables.com/
 
 Regular expression: 
 https://pythex.org/
+https://docs.python.org/3/library/re.html
+https://www.regular-expressions.info/
 
 Files used in Automate the borig Stuff book - 
 https://nostarch.com/automatestuff2/
 
+os.path module 
+https://docs.python.org/3/library/os.path.html
