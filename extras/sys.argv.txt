@@ -1,0 +1,19 @@
+What is sys.argv?
+sys.argv is a list in Python, which contains the command-line arguments passed to the script.
+
+len(sys.argv) --> count the number of arguments.
+
+To work with command line arguments, use sys.argv.
+
+import sys module
+
+-----------
+
+C:\Users\himan\OneDrive\Documents\Interview_Prep\My_Learning_Cognizant\atbswpython\atbswp_python_programming\extras>python sysargvExample1.py test argument
+This is the name f the script:  sysargvExample1.py
+Number if the arguments:  3
+The arguments are:  ['sysargvExample1.py', 'test', 'argument']
+
+our first argument is always the script name, and it is also being counted in the number of arguments. So even if you do not pass any arguments to your script, the argv variable always contains at least one element, and that is the script name.
+
+The arguments in the Python argv method are always parsed as the String.

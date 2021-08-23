@@ -1,0 +1,14 @@
+os.unlink(<file name>) -- Deletes single file
+
+os.rmdir(<directory folder name>) --Deletes empty directory.
+
+shutil.rmtree() -- deleted folder and its content
+
+Above function permanently delete. 
+
+before running the above finctios, dry run them first. 
+  
+
+send2trash module
+
+send2trash.send2trash('c:\\filename.txt')

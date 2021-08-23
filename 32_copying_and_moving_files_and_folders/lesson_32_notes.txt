@@ -1,0 +1,9 @@
+shutil.copy(<source file>, <destination>)
+
+copy can be used for rename as well. 
+
+shutil.copytree()
+
+shutil.move()
+
+shutil.move(<dource file name>, <new file name in current working directory>)

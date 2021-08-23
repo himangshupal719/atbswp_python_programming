@@ -1,0 +1,13 @@
+for folderName, subfolders, filenames  in os.walk('c:\\<folder name>):
+	print('The folder is ' + foldername)
+	print('The subfolders in ' + fodlername + ' are: ' + str(subfolders))
+	print('The filenames in ' + fodlername + ' are: ' + str(filenames))
+	print()
+
+	for subfolder in subfolders: 
+		if 'fish' in dubfolder:
+			os.rmdir(subfolder)
+
+	for file in filenames:
+		if file.endswith('.py'):
+			shutil.copy(os.path.join(folderName, file), os.path.join(folderName, file + '.backup'))

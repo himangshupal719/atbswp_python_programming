@@ -58,3 +58,9 @@ https://nostarch.com/automatestuff2/
 
 os.path module 
 https://docs.python.org/3/library/os.path.html
+
+https://automatetheboringstuff.com/chapter8/
+
+
+Random module: 
+https://www.w3schools.com/python/ref_random_sample.asp
