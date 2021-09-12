@@ -1,0 +1,14 @@
+webbrowser - Comes with Python and opens a browser to a specific page.
+
+requests - Downloads files and web pages from the internet.
+
+bs4 - Parses HTML, the format that web pages are written in.
+
+selenium - Launches and controls a web browser. The selenium module is able to fill in forms and simulate mouse clicks in this browser.
+
+The webbrowser module’s open() function can launch a new browser to a specified URL.
+
+>>> import webbrowser
+>>> webbrowser.open('https://www.programiz.com/python-programming/methods/string')
+True
+>>> 

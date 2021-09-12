@@ -1,0 +1,115 @@
+https://automatetheboringstuff.com/chapter10/
+
+Raising Exceptions
+--------------------
+Python raises an exception whenever it tries to execute invalid code.
+
+Raising an exception is a way of saying, “Stop running the code in this function and move the program execution to the except statement.”
+
+With try and except statements your program can recover from exceptions that you anticipated.
+
+Exceptions are raised with a raise statement.
+- The raise keyword
+- A call to the Exception() function
+- A string with a helpful error message passed to teh Exceprtion() function
+
+>>> raise Exception("This is the error message")
+Traceback (most recent call last):
+  File "<pyshell#0>", line 1, in <module>
+    raise Exception("This is the error message")
+Exception: This is the error message
+
+If there are no try and except statements covering the raise statement that raised the exception, the program simply crashes and displays the exception’s error message.
+
+Using the try and except statements, you can handle errors more gracefully instead of letting the entire program crash.
+
+Getting the Traceback as a String
+----------------------------------
+When Python encounters an error, it produces a treasure trove of error information called the traceback. The traceback includes the error message, the line number of the line that caused the error, and the sequence of the function calls that led to the error. This sequence of calls is called the call stack.
+
+In programs where functions can be called from multiple places, the call stack can help you determine which call led to the error.
+
+def spam():
+    bacon()
+
+def bacon():
+    raise Exception("This is the error message.")
+
+spam()
+
+
+Traceback (most recent call last):
+  File "C:/Users/himan/OneDrive/Documents/Interview_Prep/My_Learning_Cognizant/atbswpython/atbswp_python_programming/35_the_raise_and_assert_statements/errorExample.py", line 7, in <module>
+    spam()
+  File "C:/Users/himan/OneDrive/Documents/Interview_Prep/My_Learning_Cognizant/atbswpython/atbswp_python_programming/35_the_raise_and_assert_statements/errorExample.py", line 2, in spam
+    bacon()
+  File "C:/Users/himan/OneDrive/Documents/Interview_Prep/My_Learning_Cognizant/atbswpython/atbswp_python_programming/35_the_raise_and_assert_statements/errorExample.py", line 5, in bacon
+    raise Exception("This is the error message.")
+Exception: This is the error message.
+
+Python displays the traceback whenever a raised exception goes unhandled.
+
+traceback.format_exc() - obtain traceback it as a string by calling traceback.format_exc().
+
+>>> import traceback
+>>> try:
+	raise Exception('This is the error message.')
+except:
+	errorFile = open('errorInfo.txt', 'w')
+	errorFile.write(traceback.format_exc())
+	errorFile.close()
+	print('The traceback info was written to errorInfo.txt.')
+
+Traceback (most recent call last):
+  File "<pyshell#10>", line 2, in <module>
+Exception: This is the error message.
+
+
+
+Assertion:
+-----------
+An assertion is a sanity check to make sure your code isn’t doing something obviously wrong. These sanity checks are performed by assert statements. 
+
+If the sanity check fails, then an AssertionError exception is raised.
+
+An assert statement consists of the following:
+- The assert keyword
+- A condition (that is, an expression that evaluates to True or False)
+- A comma
+- A string to display when the condition is False
+
+
+In plain English, an assert statement says, “I assert that the condition holds true, and if not, there is a bug somewhere, so immediately stop the program.”
+
+>>> ages = [26, 57, 92, 54,22,15,17,80,47,73]
+>>> ages.sort()
+>>> ages
+[15, 17, 22, 26, 47, 54, 57, 73, 80, 92]
+>>> assert ages[0] <= ages[-1]
+
+If we do like below - 
+
+ages =  [26, 57, 92, 54, 22, 15, 17, 80, 47, 73]
+ages.reverse()
+print(ages)
+assert ages[0] <= ages[-1]
+
+Traceback (most recent call last):
+  File "C:/Users/himan/OneDrive/Documents/Interview_Prep/My_Learning_Cognizant/atbswpython/atbswp_python_programming/35_the_raise_and_assert_statements/assertExample.py", line 9, in <module>
+    assert ages[0] <= ages[-1]
+AssertionError
+
+
+Unlike exceptions, your code should not handle assert statements with try and except;if an assert fails, your program should crash. By “failing fast” like this, you shorten the time between the original cause of the bug and when you first notice the bug.
+
+If you run a Python script with python -O myscript.py instead of python myscript.py, Python will skip assert statements.
+
+Assertions are for programmer errors, not user errors. Assertions should only fail while the program is under development; a user should never see an assertion error in a finished program. 
+Assertions also aren’t a replacement for comprehensive testing. 
+
+Assertions also aren’t a replacement for comprehensive testing.
+
+You shouldn’t use assert statements in place of raising exceptions, because users can choose to turn off assertions. If you run a Python script with python -O myscript.py instead of python myscript.py, Python will skip assert statements.
+
+
+

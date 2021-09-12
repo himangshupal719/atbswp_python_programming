@@ -64,3 +64,29 @@ https://automatetheboringstuff.com/chapter8/
 
 Random module: 
 https://www.w3schools.com/python/ref_random_sample.asp
+
+Request Module:
+https://docs.python-requests.org/en/master/
+
+Selenium with Python: 
+https://selenium-python.readthedocs.io/
+
+REST with Python:
+https://realpython.com/api-integration-in-python/
+
+
+Joel on Software: The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!): https://www.joelonsoftware.com/articles/Unicode.html
+Pragmatic Unicode: https://nedbatchelder.com/text/unipain.html
+
+Request Modules: https://requests.readthedocs.org/.
+
+HTML Beginner:
+https://developer.mozilla.org/en-US/learn/html/
+https://htmldog.com/guides/html/beginner/
+https://www.codecademy.com/learn/learn-html
+
+Why you shouldn’t parse HTML with regular expressions:
+https://stackoverflow.com/a/1732454/1893164/.
+
+Beautifulsoup Documentation: 
+https://www.crummy.com/software/BeautifulSoup/bs4/doc/

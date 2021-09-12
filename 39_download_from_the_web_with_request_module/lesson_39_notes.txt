@@ -1,0 +1,103 @@
+The requests module lets you easily download files from the web without having to worry about complicated issues such as network errors, connection problems, and data compression.
+
+Install requests module  - pip install --user requests.
+
+Dpwnloading Web PAges with request.get() function
+-------------------------------------------------
+
+The requests.get() function takes a string of a URL to download. 
+
+By calling type() on requests.get()’s return value, you can see that it returns a Response object, which contains the response that the web server gave for your request. 
+
+>>> import requests
+>>> res = requests.get('https://automatetheboringstuff.com/files/rj.txt')
+>>> type(res)
+<class 'requests.models.Response'>
+>>> res.status_code
+200
+>>> requests.codes.ok
+200
+>>> res.status_code == requests.codes.ok
+True
+>>> len(res.text)
+178978
+>>> print(res.text[:250])
+The Project Gutenberg EBook of Romeo and Juliet, by William Shakespeare
+
+
+
+This eBook is for the use of anyone anywhere at no cost and with
+
+almost no restrictions whatsoever.  You may copy it, give it away or
+
+re-use it under the terms of the Projec
+>>> 
+
+
+You can tell that the request for this web page succeeded by checking the status_code attribute of the Response object. 
+
+If it is equal to the value of requests.codes.ok, then everything went fine.
+
+(Incidentally, the status code for “OK” in the HTTP protocol is 200. You may already be familiar with the 404 status code for “Not Found.”)
+
+If the request succeeded, the downloaded web page is stored as a string in the Response object’s text variable.
+
+If the request failed and displayed an error message, like “Failed to establish a new connection” or “Max retries exceeded,” then check your internet connection.
+
+Checking Errors
+---------------
+Response object has a status_code attribute that can be checked against requests.codes.ok (a variable that has the integer value 200) to see whether the download succeeded.
+
+A simpler way to check for success is to call the raise_for_status() method on the Response object. This will raise an exception if there was an error downloading the file and will do nothing if the download succeeded. 
+
+>>> res = requests.get('https://inventwithpython.com/page_that_does_not_exist')
+>>> res.raise_for_status()
+Traceback (most recent call last):
+  File "<pyshell#24>", line 1, in <module>
+    res.raise_for_status()
+  File "C:\Users\himan\AppData\Roaming\Python\Python38\site-packages\requests\models.py", line 953, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://inventwithpython.com/page_that_does_not_exist
+>>> 
+
+The raise_for_status() method is a good way to ensure that a program halts if a bad download occurs. This is a good thing: You want your program to stop as soon as some unexpected error happens. If a failed download isn’t a deal breaker for your program, you can wrap the raise_for_status() line with try and except statements to handle this error case without crashing.
+
+>>> try:
+	res.raise_for_status()
+except Exception as exc:
+	print('There was a problem: %s' % (exc))
+
+	
+There was a problem: 404 Client Error: Not Found for url: https://inventwithpython.com/page_that_does_not_exist
+>>> 
+
+Always call raise_for_status() after calling requests.get(). You want to be sure that the download has actually worked before your program continues.
+
+
+Saving downloaded files to the Hard Drive
+------------------------------------------
+
+From here, you can save the web page to a file on your hard drive with the standard open() function and write() method. There are some slight differences, though. First, you must open the file in write binary mode by passing the string 'wb' as the second argument to open(). Even if the page is in plaintext (such as the Romeo and Juliet text you downloaded earlier), you need to write binary data instead of text data in order to maintain the Unicode encoding of the text.
+
+To write the web page to a file, you can use a for loop with the Response object’s iter_content() method.
+
+>>> res = requests.get('https://automatetheboringstuff.com/files/rj.txt')
+>>> res.raise_for_status()
+>>> playFile = open('RomeoAndJuliet.txt', 'wb')
+>>> for chunk in res.iter_content(10000):
+	playFile.write(chunk)
+>>> playFile.close()
+
+The iter_content() method returns “chunks” of the content on each iteration through the loop. Each chunk is of the bytes data type, and you get to specify how many bytes each chunk will contain. One hundred thousand bytes is generally a good size, so pass 100000 as the argument to iter_content().
+
+The requests module simply handles downloading the contents of web pages. Once the page is downloaded, it is simply data in your program. Even if you were to lose your internet connection after downloading the web page, all the page data would still be on your computer.
+
+To review, here’s the complete process for downloading and saving a file:
+
+Call requests.get() to download the file.
+Call open() with 'wb' to create a new file in write binary mode.
+Loop over the Response object’s iter_content() method.
+Call write() on each iteration to write the content to the file.
+Call close() to close the file.
+
+

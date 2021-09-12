@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:/Users/himan/OneDrive/Documents/Interview_Prep/My_Learning_Cognizant/atbswpython/atbswp_python_programming/35_the_raise_and_assert_statements/errorExample.py", line 8, in bacon
+    raise Exception("This is the error message.")
+Exception: This is the error message.

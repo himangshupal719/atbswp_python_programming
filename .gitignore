@@ -130,3 +130,6 @@ dmypy.json
 
 #No audio Vedio file 
 .mp4
+
+# Ignore xkcd downloaded files
+xkcd

@@ -1,0 +1,71 @@
+Logging is a great way to understand what’s happening in your program and in what order it’s happening. Python’s logging module makes it easy to create a record of custom messages that you write. These log messages will describe when the program execution has reached the logging function call and list any variables you have specified at that point in time. On the other hand, a missing log message indicates a part of the code was skipped and never executed.
+
+To enable the logging module to display log messages on your screen as your program runs, copy the following to the top of your program -
+
+import logging
+logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s -  %(levelname)
+s -  %(message)s')
+
+basicConfig() function lets you specify what details about the LogRecord object you want to see and how you want those details displayed.
+
+Logging messages provide a trail of breadcrumbs that can help you figure out when things started to go wrong.
+
+The nice thing about log messages is that you’re free to fill your program with as many as you like, and you can always disable them later by adding a single logging.disable(logging.CRITICAL) call.
+
+Logging Levels:
+---------------
+Logging levels provide a way to categorize your log messages by importance.
+
+DEBUG - loggin.debug() - The lowest level. Used for small details. Usually you care about these messages only when diagnosing problems.
+
+INFO - logging.info() - Used to record information on general events in your program or confirm that things are working at their point in the program.
+
+WARNING - ligging.warning() - Used to indicate a potential problem that doesn’t prevent the program from working but might do so in the future.
+
+ERROR - logging.error() - Used to record an error that caused the program to fail to do something.
+
+CRITICAL - logging.critical() - The highest level. Used to indicate a fatal error that has caused or is about to cause the program to stop running entirely.
+
+Your logging message is passed as a string to these functions. The logging levels are suggestions. Ultimately, it is up to you to decide which category your log message falls into. 
+
+
+>>> import logging
+>>> logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s -
+%(levelname)s -  %(message)s')
+>>> logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s -  %(message)s')
+>>> logging.debug('Some debugging details.')
+2021-08-31 23:31:21,926 -  DEBUG -  Some debugging details.
+>>> logging.info('The logging module is working.')
+2021-08-31 23:31:40,288 -  INFO -  The logging module is working.
+>>> logging.warning('An error message is about to be logged.')
+2021-08-31 23:32:10,616 -  WARNING -  An error message is about to be logged.
+>>> logging.error('An error has occurred.')
+2021-08-31 23:32:35,645 -  ERROR -  An error has occurred.
+>>> logging.critical('The program is unable to recover!')
+2021-08-31 23:32:50,657 -  CRITICAL -  The program is unable to recover!
+
+The benefit of logging levels is that you can change what priority of logging message you want to see. Passing logging.DEBUG to the basicConfig() function’s level keyword argument will show messages from all the logging levels (DEBUG being the lowest level). But after developing your program some more, you may be interested only in errors. In that case, you can set basicConfig()’s level argument to logging.ERROR. This will show only ERROR and CRITICAL messages and skip the DEBUG, INFO, and WARNING messages.
+
+
+Disabling Logging:
+--------------------
+The logging.disable() function disables these so that you don’t have to go into your program and remove all the logging calls by hand. You simply pass logging.disable() a logging level, and it will suppress all log messages at that level or lower. 
+
+To disable logging entirely, just add logging.disable(logging.CRITICAL) to your program.
+
+>>> logging.basicConfig(level=logging.INFO, format=' %(asctime)s - %(levelname)s -  %(message)s')
+>>> logging.critical('Critical error! Critical error!')
+2021-08-31 23:36:18,054 -  CRITICAL -  Critical error! Critical error!
+>>> logging.disable(logging.CRITICAL)
+ 
+>>> logging.critical('Critical error! Critical error!')
+>>> logging.error('Error! Error!')
+>>> logging.debug('Debug is in progress')
+
+Since logging.disable() will disable all messages after it, you will probably want to add it near the import logging line of code in your program.
+
+Logging to a File:
+--------------------
+
+>>> logging.basicConfig(filename='myProgramLog.txt', level=logging.DEBUG, format='%(asctime)s -  %(levelname)s -  %(message)s')
+>>> logging.info('Log messages are being written into a file.')
