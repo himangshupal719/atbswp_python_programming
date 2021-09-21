@@ -1,0 +1,246 @@
+To create an xlsx file -
+
+>>> import os
+>>> os.getcwd()
+'C:\\Python38'
+>>> os.chdir(r'C:\Users\himan\OneDrive\Documents\Interview_Prep\My_Learning_Cognizant\atbswpython\atbswp_python_programming\43_')
+>>> wb = openpyxl.Workbook()
+>>> wb.sheetnames
+['Sheet']
+>>> sheet = wb.active
+>>> sheet.title
+'Sheet'
+>>> wb.sheetnames
+['Sheet']
+>>> sheet.title = 'Bacon Spam Eggs Sheet'
+>>> wb.sheetnames
+['Bacon Spam Eggs Sheet']
+>>> wb.save('example_copy.xlsx')
+
+
+Change the name of the sheet - 
+
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook('example_copy.xlsx')
+>>> sheet = wb.active
+>>> sheet.title
+'Bacon Spam Eggs Sheet'
+>>> sheet.title = 'Spam Spam Spam'
+>>> wb.save('example_copy.xlsx')
+
+
+Whenever you edit a spreadsheet you’ve loaded from a file, you should always save the new, edited spreadsheet to a different filename than the original. That way, you’ll still have the original spreadsheet file to work with in case a bug in your code caused the new, saved file to have incorrect or corrupt data.
+
+Creating and REmoving Sheets:
+------------------------------
+The create_sheet() method returns a new Worksheet object named SheetX, which by default is set to be the last sheet in the workbook. Optionally, the index and name of the new sheet can be specified with the index and title keyword arguments.
+
+>>> import openpyxl
+>>> wb = openpyxl.Workbook()
+>>> wb.sheetnames
+['Sheet']
+>>> wb.create_sheet() # Add new sheet.
+<Worksheet "Sheet1">
+>>> wb.sheetnames
+['Sheet', 'Sheet1']
+>>> wb.create_sheet(index = 0, title='First Sheet')
+<Worksheet "First Sheet">
+>>> wb.sheetnames
+['First Sheet', 'Sheet', 'Sheet1']
+AttributeError: 'Workbook' object has no attribute 'create_Sheet'
+>>> wb.create_sheet(index = 2, title = 'Middle Sheet')
+<Worksheet "Middle Sheet">
+>>> wb.sheetnames
+['First Sheet', 'Sheet', 'Middle Sheet', 'Sheet1']
+>>> wb.active
+<Worksheet "First Sheet">
+>>> 
+
+>>> wb.sheetnames
+['First Sheet', 'Sheet', 'Middle Sheet', 'Sheet1']
+>>> del wb['Middle Sheet']
+>>> del wb['Sheet1']
+>>> wb.sheetnames
+['First Sheet', 'Sheet']
+
+You can use the del operator to delete a sheet from a workbook, just like you can use it to delete a key-value pair from a dictionary.
+
+Remember to call the save() method to save the changes after adding sheets to or removing sheets from the workbook.
+
+wb.save('example2.xlsx')
+
+
+Writing Values to Cells:
+------------------------
+Writing values to cells is much like writing values to keys in a dictionary.
+If you have the cell’s coordinate as a string, you can use it just like a dictionary key on the Worksheet object to specify which cell to write to.
+
+>>> import openpyxl
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb['Sheet']
+>>> sheet['A1']='Hello, world!' # Edit the cell's value
+>>> sheet['A1'].value
+'Hello, world!'
+>>> wb.save('example3.xlsx')
+
+
+Setting the Font Style of Cells
+--------------------------------
+To customize font styles in cells, important, import the Font() function from the openpyxl.styles module.
+
+This allows you to type Font() instead of openpyxl.styles.Font().
+
+>>> from openpyxl.styles import Font
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb['Sheet']
+>>> italic24Font  = Font(size = 24, italic = True) # Create a font
+>>> sheet['A1'].font = italic24Font # Apply the font to A1
+>>> sheet['A1'] = 'Hello, world!'
+>>> wb.save('Styles.xlsx')
+
+--> Font Objects - To set font attributes, you pass keyword arguments to Font(). 
+name - String - The font name, such as 'Calibari' or 'Times New Roman'
+
+size - Integer - The font size
+
+bold - Boolean - True, for bold font
+
+italic - Boolean - True, for italic font
+
+You can call Font() to create a Font object and store that Font object in a variable. You then assign that variable to a Cell object’s font attribute.
+
+>>> import openpyxl
+>>> from openpyxl.styles import Font
+>>> wb = openpyxl.Workbook()
+>>> wheet = wb['Sheet']
+>>> sheet = wb['Sheet']
+>>> 
+>>> fontObj1 = Font(name = 'Times New Roman', bold = True)
+>>> sheet['A1'].font = fontObj1
+>>> sheet['A1'] = 'Bold Times New Roman'
+>>> fontObj2 = Font(size = 24, italic = True)
+>>> sheet['B3'].font = fontObj2
+>>> sheet['B3']='24 pt Italic'
+>>> 
+>>> wb.save('styles1.xlsx')
+
+
+
+Formulas:
+-----------
+Excel formulas, which begin with an equal sign, can configure cells to contain values calculated from other cells. 
+
+>>> import openpyxl
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb.active
+>>> sheet['A1'] = 200
+>>> sheet['A2'] = 300
+>>> sheet['A3']='=SUM(A1:A2)' # Set the formula.
+>>> wb.save('writeFormula.xlsx')
+
+Excel formulas offer a level of programmability for spreadsheets but can quickly become unmanageable for complicated tasks. For example, even if you’re deeply familiar with Excel formulas, it’s a headache to try to decipher what =IFERROR(TRIM(IF(LEN(VLOOKUP(F7, Sheet2!$A$1:$B$10000, 2, FALSE))>0,SUBSTITUTE(VLOOKUP(F7, Sheet2!$A$1:$B$10000, 2, FALSE), " ", ""),"")), "") actually does. Python code is much more readable.
+
+
+Adjusting Rows and Columns:
+----------------------------
+If you need to set a row or column’s size based on its cells’ contents or if you want to set sizes in a large number of spreadsheet files, it will be much quicker to write a Python program to do it.
+
+Rows and columns can also be hidden entirely from view. Or they can be “frozen” in place so that they are always visible on the screen and appear on every page when the spreadsheet is printed (which is handy for headers).
+
+--> Setting Row Height and Column Width
+Worksheet objects have row_dimensions and column_dimensions attributes that control row heights and column widths.
+
+>>> import openpyxl
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb.active
+>>> sheet['A1'] = 'Tall row'
+>>> sheet['B2'] = 'Wide column'
+>>> # Set the height and width:
+>>> sheet.row_dimensions[1].height = 70
+>>> sheet.column_dimensions['B'].width = 20 --> Need to check why it did not work?
+>>> wb.save('dimensions.xlsx')
+
+*** Columns with widths of 0 or rows with heights of 0 are hidden from the user.
+
+Merging and Unmerging Cells:
+------------------------------
+
+>>> import openpyxl
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb.active
+>>> sheet.merge_cells('A1:D3') # Merge all these cells.
+>>> sheet['A1'] = 'Twelve cells merged together.'
+>>> sheet.merge_cells('C5:D5') # Merge these two cells.
+>>> sheet['C5'] = 'Two merged cells.'
+>>> wb.save('merged.xlsx')
+
+The argument to merge_cells() is a single string of the top-left and bottom-right cells of the rectangular area to be merged
+
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook('merged.xlsx')
+>>> sheet = wb.active
+>>> sheet.unmerge_cells('A1:D3') # Split these cells up.
+>>> sheet.unmerge_cells('C5:D5')
+>>> wb.save('merged.xlsx')
+
+To unmerge cells, call the unmerge_cells() sheet method.
+
+Freezing Panes:
+-----------------
+
+In OpenPyXL, each Worksheet object has a freeze_panes attribute that can be set to a Cell object or a string of a cell’s coordinates. Note that all rows above and all columns to the left of this cell will be frozen, but the row and column of the cell itself will not be frozen.
+
+To unfreeze all panes, set freeze_panes to None or 'A1'. 
+
+sheet.freeze_panes = 'A2' --> Row 1
+sheet.freeze_panes = 'B1' --> Column A
+sheet.freeze_panes = 'C1' --> Column A and B
+sheet.freeze_panes = 'C2' --> Row 1 and Column A and B
+sheet.freeze_panes = 'A1' OR sheet.freeze_panes = None --> No frozen panes
+
+
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook('produceSales.xlsx')
+>>> sheet = wb.active
+>>> sheet.freeze_panes = 'A2' # Freeze the rows above A2.
+>>> wb.save('freezeExample.xlsx')
+
+
+
+Charts:
+---------
+OpenPyXL supports creating bar, line, scatter, and pie charts using the data in a sheet’s cells.
+
+To make a chart, you need to do the following:
+
+1. Create a Reference object from a rectangular selection of cells.
+2. Create a Series object by passing in the Reference object.
+3. Create a Chart object.
+4. Append the Series object to the Chart object.
+5. Add the Chart object to the Worksheet object, optionally specifying which cell should be the top-left corner of the chart.
+
+The Reference object requires some explaining. You create Reference objects by calling the openpyxl.chart.Reference() function and passing three arguments:
+
+1. The Worksheet object containing your chart data.
+2. A tuple of two integers, representing the top-left cell of the rectangular selection of cells containing your chart data: the first integer in the tuple is the row, and the second is the column. Note that 1 is the first row, not 0.
+3. A tuple of two integers, representing the bottom-right cell of the rectangular selection of cells containing your chart data: the first integer in the tuple is the row, and the second is the column.
+
+>>> import openpyxl
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb.active
+>>> for i in range(1, 11): # create some data in column A
+...     sheet['A' + str(i)] = i
+...
+>>> refObj = openpyxl.chart.Reference(sheet, min_col=1, min_row=1, max_col=1,
+max_row=10)
+>>> seriesObj = openpyxl.chart.Series(refObj, title='First series')
+
+>>> chartObj = openpyxl.chart.BarChart()
+>>> chartObj.title = 'My Chart'
+>>> chartObj.append(seriesObj)
+
+>>> sheet.add_chart(chartObj, 'C5')
+>>> wb.save('sampleChart.xlsx')
+
+
+You can also create line charts, scatter charts, and pie charts by calling openpyxl.charts.LineChart(), openpyxl.chart.ScatterChart(), and openpyxl.chart.PieChart().

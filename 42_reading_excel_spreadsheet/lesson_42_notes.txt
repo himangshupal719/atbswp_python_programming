@@ -1,0 +1,240 @@
+The 'openpyxl' module allows your Python programs to read and modify Excel spreadsheet files. 
+
+Install openpyxl==2.6.2 --> pip install --user openpyxl==2.6.2
+
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook('example.xlsx')
+>>> type(wb)
+<class 'openpyxl.workbook.workbook.Workbook'>
+>>> wb
+<openpyxl.workbook.workbook.Workbook object at 0x00000152D0363CD0>
+
+The openpyxl.load_workbook() function takes in the filename and returns a value of the workbook data type. This Workbook object represents the Excel file, a bit like how a File object represents an opened text file.
+
+Getting sheet from the workbook
+------------------------------------
+
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook('example.xlsx')
+>>> wb.sheetnames   # The workbook's sheet names
+['Sheet1', 'Sheet2', 'Sheet3']
+>>> sheet = wb['Sheet3']  # Get a sheet from the workbook
+>>> sheet
+<Worksheet "Sheet3">
+>>> type(sheet)
+<class 'openpyxl.worksheet.worksheet.Worksheet'>
+>>> sheet.title # Get the sheet's title as string
+'Sheet3'
+>>> anotherSheet = wb.active # Get the active sheet
+>>> anotherSheet
+<Worksheet "Sheet1">
+>>>
+
+Each sheet is represented by a Worksheet object, which you can obtain by using the square brackets with the sheet name string like a dictionary key. Finally, you can use the active attribute of a Workbook object to get the workbook’s active sheet. 
+
+
+Getting Cells from the Sheets
+-----------------------------
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook('example.xlsx')
+>>> sheet = wb['Sheet1']
+>>> sheet['A1']  # Get the cell from the sheet
+<Cell 'Sheet1'.A1>
+>>> sheet['A1'].value # Get the value from the cell
+datetime.datetime(2015, 4, 5, 13, 34, 2)
+>>> str(sheet['A1'].value)
+'2015-04-05 13:34:02'
+>>> c = sheet['B1'] # Get another cell from the sheet
+>>> c.value
+'Apples'
+>>> 'Row %s, columns %s is %s' %(c.row, c.column, c.value) ## Get the row, column, and value from the cell.
+'Row 1, columns 2 is Apples'
+>>> 'Cell %s is %s' %(c.coordinate, c.value)
+'Cell B1 is Apples'
+>>> sheet['C1'].value
+73
+
+The Cell object has a value attribute that contains, unsurprisingly, the value stored in that cell. Cell objects also have row, column, and coordinate attributes that provide location information for the cell.
+
+OpenPyXL will automatically interpret the dates in column A and return them as datetime values rather than strings. 
+
+Specifying a column by letter can be tricky to program, especially because after column Z, the columns start by using two letters: AA, AB, AC, and so on. As an alternative, you can also get a cell using the sheet’s cell() method and passing integers for its row and column keyword arguments. The first row or column integer is 1, not 0.
+
+>>> sheet.cell(row = 1, column = 2)
+<Cell 'Sheet1'.B1>
+>>> sheet.cell(row=1, column=2).value
+'Apples'
+>>> for i in range(1,8,2): # Go throught every otehr row:
+	print(i, sheet.cell(row = i, column=2).value)
+
+	
+1 Apples
+3 Pears
+5 Apples
+7 Strawberries
+
+
+
+As you can see, using the sheet’s cell() method and passing it row=1 and column=2 gets you a Cell object for cell B1, just like specifying sheet['B1'] did. Then, using the cell() method and its keyword arguments, you can write a for loop to print the values of a series of cells.
+
+You can determine the size of the sheet with the Worksheet object’s max_row and max_column attributes.
+
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook('example.xlsx')
+>>> sheet = wb['Sheet1']
+>>> sheet
+<Worksheet "Sheet1">
+>>> sheet.max_row # Get the highest  row number.
+7
+>>> sheet.max_column # Get the highest column number
+3
+
+
+Note that the max_column attribute is an integer rather than the letter that appears in Excel.
+
+Converting Between Column Letters and Numbers
+--------------------------------------------------
+To convert from letters to numbers, call the openpyxl.utils.column_index_from_string() function. To convert from numbers to letters, call the openpyxl.utils.get_column_letter() function. 
+
+>>> import openpyxl
+>>> from openpyxl.utils import get_column_letter, column_index_from_string
+>>> get_column_letter(1) # Translate column 1 to a letter.
+'A'
+>>> get_column_letter(2)
+'B'
+>>> get_column_letter(27)
+'AA'
+>>> get_column_letter(900)
+'AHP'
+>>> wb = openpyxl.load_workbook('example.xlsx')
+>>> sheet = wb['Sheet1']
+>>> get_column_letter(sheet.max_column)
+'C'
+>>> column_index_from_string('AA')
+27
+>>> 
+
+After you import these two functions from the openpyxl.utils module, you can call get_column_letter() and pass it an integer like 27 to figure out what the letter name of the 27th column is.
+
+The function column_index_string() does the reverse: you pass it the letter name of a column, and it tells you what number that column is. You don’t need to have a workbook loaded to use these functions. If you want, you can load a workbook, get a Worksheet object, and use a Worksheet attribute like max_column to get an integer. Then, you can pass that integer to get_column_letter().
+
+
+
+Getting Rows and Columns from the sheets
+-------------------------------------------
+You can slice Worksheet objects to get all the Cell objects in a row, column, or rectangular area of the spreadsheet. Then you can loop over all the cells in the slice. 
+
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook('example.xlsx')
+>>> sheet = wb['Sheet1']
+>>> tuple(sheet['A1':'C3'])  # Get all cells from A1 to C3
+((<Cell 'Sheet1'.A1>, <Cell 'Sheet1'.B1>, <Cell 'Sheet1'.C1>), (<Cell 'Sheet1'.A2>, <Cell 'Sheet1'.B2>, <Cell 'Sheet1'.C2>), (<Cell 'Sheet1'.A3>, <Cell 'Sheet1'.B3>, <Cell 'Sheet1'.C3>))
+>>> for rowOfCellObjects in sheet['A1':'C3']:
+	for cellObj in rowOfCellObjects:
+		print(cellObj.coordinate, cellObj.value)
+	print('-------- End of Row ---------')
+
+	
+A1 2015-04-05 13:34:02
+B1 Apples
+C1 73
+-------- End of Row ---------
+A2 2015-04-05 03:41:23
+B2 Cherries
+C2 85
+-------- End of Row ---------
+A3 2015-04-06 12:46:51
+B3 Pears
+C3 14
+-------- End of Row ---------
+
+Here, we specify that we want the Cell objects in the rectangular area from A1 to C3, and we get a Generator object containing the Cell objects in that area. To help us visualize this Generator object, we can use tuple() on it to display its Cell objects in a tuple.4
+
+This tuple contains three tuples: one for each row, from the top of the desired area to the bottom. Each of these three inner tuples contains the Cell objects in one row of our desired area, from the leftmost cell to the right. So overall, our slice of the sheet contains all the Cell objects in the area from A1 to C3, starting from the top-left cell and ending with the bottom-right cell.
+
+To print the values of each cell in the area, we use two for loops. The outer for loop goes over each row in the slice. Then, for each row, the nested for loop goes through each cell in that row.
+
+
+To access the values of cells in a particular row or column, you can also use a Worksheet object’s rows and columns attribute. These attributes must be converted to lists with the list() function before you can use the square brackets and an index with them.
+
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook('example.xlsx')
+>>> sheet = wb.active
+>>> sheet
+<Worksheet "Sheet1">
+>>> list(sheet.columns)[1] # Get second column's cells
+(<Cell 'Sheet1'.B1>, <Cell 'Sheet1'.B2>, <Cell 'Sheet1'.B3>, <Cell 'Sheet1'.B4>, <Cell 'Sheet1'.B5>, <Cell 'Sheet1'.B6>, <Cell 'Sheet1'.B7>)
+>>> sheet.columns
+<generator object Worksheet._cells_by_col at 0x00000152D0410C80>
+>>> list(sheet.columns)
+[(<Cell 'Sheet1'.A1>, <Cell 'Sheet1'.A2>, <Cell 'Sheet1'.A3>, <Cell 'Sheet1'.A4>, <Cell 'Sheet1'.A5>, <Cell 'Sheet1'.A6>, <Cell 'Sheet1'.A7>), (<Cell 'Sheet1'.B1>, <Cell 'Sheet1'.B2>, <Cell 'Sheet1'.B3>, <Cell 'Sheet1'.B4>, <Cell 'Sheet1'.B5>, <Cell 'Sheet1'.B6>, <Cell 'Sheet1'.B7>), (<Cell 'Sheet1'.C1>, <Cell 'Sheet1'.C2>, <Cell 'Sheet1'.C3>, <Cell 'Sheet1'.C4>, <Cell 'Sheet1'.C5>, <Cell 'Sheet1'.C6>, <Cell 'Sheet1'.C7>)]
+>>> for cellObj in list(sheet.columns)[1]:
+	print(cellObj.value)
+
+	
+Apples
+Cherries
+Pears
+Oranges
+Apples
+Bananas
+Strawberries
+>>> for cellObj in list(sheet.rows):
+
+>>> sheet.rows
+<generator object Worksheet._cells_by_row at 0x00000152D0410970>
+>>> list(sheet.rows)
+[(<Cell 'Sheet1'.A1>, <Cell 'Sheet1'.B1>, <Cell 'Sheet1'.C1>), (<Cell 'Sheet1'.A2>, <Cell 'Sheet1'.B2>, <Cell 'Sheet1'.C2>), (<Cell 'Sheet1'.A3>, <Cell 'Sheet1'.B3>, <Cell 'Sheet1'.C3>), (<Cell 'Sheet1'.A4>, <Cell 'Sheet1'.B4>, <Cell 'Sheet1'.C4>), (<Cell 'Sheet1'.A5>, <Cell 'Sheet1'.B5>, <Cell 'Sheet1'.C5>), (<Cell 'Sheet1'.A6>, <Cell 'Sheet1'.B6>, <Cell 'Sheet1'.C6>), (<Cell 'Sheet1'.A7>, <Cell 'Sheet1'.B7>, <Cell 'Sheet1'.C7>)]
+>>> for rows in list(sheet.rows):
+	for cellObj in rows:
+		print(cellObj.coordinate, cellObj.value)
+	print('------------- End of Row --------------------')
+
+	
+A1 2015-04-05 13:34:02
+B1 Apples
+C1 73
+------------- End of Row --------------------
+A2 2015-04-05 03:41:23
+B2 Cherries
+C2 85
+------------- End of Row --------------------
+A3 2015-04-06 12:46:51
+B3 Pears
+C3 14
+------------- End of Row --------------------
+A4 2015-04-08 08:59:43
+B4 Oranges
+C4 52
+------------- End of Row --------------------
+A5 2015-04-10 02:07:00
+B5 Apples
+C5 152
+------------- End of Row --------------------
+A6 2015-04-10 18:10:37
+B6 Bananas
+C6 23
+------------- End of Row --------------------
+A7 2015-04-10 02:40:46
+B7 Strawberries
+C7 98
+------------- End of Row --------------------
+
+
+
+Workbooks, Sheets, Cells
+----------------------------
+As a quick review, here’s a rundown of all the functions, methods, and data types involved in reading a cell out of a spreadsheet file:
+
+1. Import the openpyxl module.
+2. Call the openpyxl.load_workbook() function.
+3. Get a workbook object.
+4. Use the active or sheetnames attributes. 
+5. Get a worksheet object.
+6. Use indexing or the cell() sheet method with row and column keyword arguments.
+7. Get Cell object.
+8. Read the cell object's value attribute. 
+
+
+
+

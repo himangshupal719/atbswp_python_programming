@@ -90,3 +90,14 @@ https://stackoverflow.com/a/1732454/1893164/.
 
 Beautifulsoup Documentation: 
 https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+
+
+What my user access:
+https://www.whatsmyua.info/
+
+
+Selenium:
+https://selenium-python.readthedocs.org/.
+
+OpenPyXL: 
+https://openpyxl.readthedocs.org/
