@@ -1,0 +1,6 @@
+imap - how t ocommunicate with email provider server to retrieve email
+
+impalib 
+
+imapclient - To access and retrieve email from inbox
+pyzmail - to format the retrieved email in a readble format
